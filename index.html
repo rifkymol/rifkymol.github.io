@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Markdown parser -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav-container">
+        <div class="nav-tabs">
+            <button class="tab-btn active" data-tab="home">Home</button>
+            <button class="tab-btn" data-tab="about">About</button>
+            <button class="tab-btn" data-tab="work">Work</button>
+            <button class="tab-btn" data-tab="blog">Blog</button>
+            <button class="tab-btn" data-tab="contact">Contact</button>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Home Section -->
+        <section id="home" class="tab-content active">
+            <div class="hero">
+                <h1 class="name">Rifky Maulana</h1>
+                <p class="tagline">Back End Developer & Creative Problem Solver</p>
+                <div class="social-links">
+                    <a href="https://github.com/rifkymol" target="_blank">GitHub</a>
+                    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+                    <a href="mailto:your.email@example.com">Email</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="tab-content">
+            <h2>About Me</h2>
+            <p class="about-text">
+                Hi! I'm a passionate developer who loves building things for the web. 
+                I focus on creating clean, efficient solutions that make a difference.
+            </p>
+            <p class="about-text">
+                Currently working with modern technologies and always eager to learn something new.
+            </p>
+        </section>
+
+        <!-- Work Section -->
+        <section id="work" class="tab-content">
+            <h2>Selected Work</h2>
+            <div class="work-grid">
+                <div class="work-item">
+                    <h3>Project Name</h3>
+                    <p>Brief description of what this project does and the technologies used.</p>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="work-item">
+                    <h3>Another Project</h3>
+                    <p>Brief description of what this project does and the technologies used.</p>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+                <div class="work-item">
+                    <h3>Cool Project</h3>
+                    <p>Brief description of what this project does and the technologies used.</p>
+                    <a href="#" class="project-link">View Project →</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="tab-content">
+            <div id="blog-list-view">
+                <h2>Blog</h2>
+                <div id="blog-posts-container">
+                    <p class="loading">Loading blog posts...</p>
+                </div>
+            </div>
+            
+            <!-- Single blog post view -->
+            <div id="blog-post-view" style="display: none;">
+                <button id="back-to-blog" class="back-btn">← Back to Blog</button>
+                <article id="blog-content"></article>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="tab-content">
+            <h2>Get in Touch</h2>
+            <p class="contact-intro">Feel free to reach out if you want to collaborate or just chat.</p>
+            <div class="contact-info">
+                <p><strong>Email:</strong> your.email@example.com</p>
+                <p><strong>Location:</strong> Jakarta, Indonesia</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2026 Your Name</p>
+    </footer>
+
+    <script src="blog-config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
