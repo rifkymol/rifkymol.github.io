@@ -3,11 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
-    // Load blog posts and recent content when page loads
-    // Use setTimeout to ensure blog-config.js is loaded first
+    // Load all content when page loads
+    // Use setTimeout to ensure config files are loaded first
     setTimeout(() => {
         loadBlogPosts();
         loadRecentContent();
+        loadAllProjects();
+        loadAllBooks();
+        loadAllHobbies();
     }, 100);
 
     tabButtons.forEach(button => {
@@ -175,47 +178,167 @@ function loadRecentContent() {
     loadRecentBlogs();
 }
 
-// Load recent projects
+// Load recent projects (featured ones for homepage)
 function loadRecentProjects() {
     const container = document.getElementById('recent-projects');
-    console.log('Loading recent projects, container:', container);
-    if (!container) {
-        console.error('recent-projects container not found!');
+    if (!container) return;
+    
+    if (typeof projects === 'undefined' || projects.length === 0) {
+        container.innerHTML = '<p>No projects yet.</p>';
         return;
     }
     
-    const recentProjects = [
-        {
-            title: 'E-Commerce Platform',
-            description: 'Full-stack web application with React and Node.js',
-            thumbnail: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-            tags: ['React', 'Node.js', 'MongoDB']
-        },
-        {
-            title: 'Task Management App',
-            description: 'Real-time collaboration tool with WebSocket',
-            thumbnail: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-            tags: ['Vue.js', 'Firebase']
-        },
-        {
-            title: 'Weather Dashboard',
-            description: 'Interactive weather app with data visualization',
-            thumbnail: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-            tags: ['JavaScript', 'API']
-        }
-    ];
+    // Get featured projects
+    const featuredProjects = projects.filter(p => p.featured);
     
     let html = '';
-    recentProjects.forEach(project => {
+    featuredProjects.forEach(project => {
+        const sizeClass = project.size ? `card-${project.size}` : '';
+        const showThumbnail = project.size !== 'small';
+        
         html += `
-            <div class="content-card">
-                <div class="card-thumbnail" style="background: ${project.thumbnail};"></div>
+            <div class="content-card ${sizeClass}">
+                ${showThumbnail ? `<div class="card-thumbnail" style="background: ${project.thumbnail};"></div>` : ''}
                 <div class="card-content">
                     <h3>${project.title}</h3>
                     <p>${project.description}</p>
                     <div class="tech-stack">
                         ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
                     </div>
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Load ALL projects for Projects tab
+function loadAllProjects() {
+    const container = document.getElementById('projects-grid');
+    if (!container) return;
+    
+    if (typeof projects === 'undefined' || projects.length === 0) {
+        container.innerHTML = '<p>No projects yet.</p>';
+        return;
+    }
+    
+    let html = '';
+    projects.forEach(project => {
+        html += `
+            <div class="work-item">
+                <div class="work-thumbnail" style="background: ${project.thumbnail};"></div>
+                <div class="work-item-content">
+                    <h3>${project.title}</h3>
+                    <p>${project.description}</p>
+                    <div class="tech-stack">
+                        ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                    </div>
+                    ${project.link ? `<a href="${project.link}" class="project-link" target="_blank">View Project →</a>` : ''}
+                    ${project.github ? `<a href="${project.github}" class="project-link github-link" target="_blank">GitHub →</a>` : ''}
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+}
+
+// Load ALL books for Reading tab
+function loadAllBooks() {
+    const container = document.getElementById('books-grid');
+    if (!container) return;
+    
+    if (typeof books === 'undefined' || books.length === 0) {
+        container.innerHTML = '<p>No books yet.</p>';
+        return;
+    }
+    
+    let html = '';
+    books.forEach(book => {
+        const sizeClass = book.size ? `card-${book.size}` : '';
+        const statusEmoji = book.status === 'reading' ? '📖' : book.status === 'completed' ? '✅' : '📋';
+        const statusText = book.status === 'reading' ? 'Reading' : book.status === 'completed' ? 'Completed' : 'Want to Read';
+        const showCover = book.size === 'featured' || book.size === 'wide';
+        
+        html += `
+            <div class="book-card content-card ${sizeClass}" data-status="${book.status}">
+                ${showCover ? `
+                    <div class="book-cover" style="background: ${book.thumbnail};">
+                        <span class="book-status-badge ${book.status === 'want' ? 'want' : ''}">${statusEmoji} ${statusText}</span>
+                    </div>
+                ` : (book.thumbnail && book.size === 'small' ? `<div class="book-cover-mini" style="background: ${book.thumbnail};"></div>` : '')}
+                <div class="card-content">
+                    <h3>${book.title}</h3>
+                    <p class="book-author">${book.author}</p>
+                    ${book.note ? `<p class="book-note">${book.note}</p>` : ''}
+                    ${!showCover ? `<span class="book-status ${book.status === 'want' ? 'want' : ''}">${statusEmoji} ${book.status === 'completed' ? 'Done' : statusText}</span>` : ''}
+                </div>
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    // Re-attach filter listeners
+    attachBookFilterListeners();
+}
+
+// Attach filter listeners for books
+function attachBookFilterListeners() {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const bookCards = document.querySelectorAll('.book-card');
+    
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+            
+            bookCards.forEach(card => {
+                const status = card.getAttribute('data-status');
+                if (filter === 'all' || status === filter) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+        });
+    });
+}
+
+// Load ALL hobbies for Hobbies tab
+function loadAllHobbies() {
+    const container = document.getElementById('hobbies-grid');
+    if (!container) return;
+    
+    if (typeof hobbies === 'undefined' || hobbies.length === 0) {
+        container.innerHTML = '<p>No hobbies yet.</p>';
+        return;
+    }
+    
+    let html = '';
+    hobbies.forEach(hobby => {
+        const sizeClass = hobby.size ? `card-${hobby.size}` : '';
+        const showCover = hobby.size === 'featured' || hobby.size === 'wide';
+        
+        html += `
+            <div class="hobby-card content-card ${sizeClass}">
+                ${showCover && hobby.thumbnail ? `
+                    <div class="hobby-cover" style="background: ${hobby.thumbnail};">
+                        <span class="hobby-icon">${hobby.icon}</span>
+                    </div>
+                ` : ''}
+                <div class="card-content">
+                    ${!showCover ? `<span class="hobby-icon-small">${hobby.icon}</span>` : ''}
+                    <h3>${hobby.title}</h3>
+                    <p>${hobby.description}</p>
+                    ${hobby.tags ? `
+                        <div class="hobby-tags">
+                            ${hobby.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
                 </div>
             </div>
         `;
@@ -274,29 +397,3 @@ function loadRecentBlogs() {
         });
     });
 }
-
-// Reading filter functionality
-document.addEventListener('DOMContentLoaded', function() {
-    const filterBtns = document.querySelectorAll('.filter-btn');
-    const bookCards = document.querySelectorAll('.book-card');
-    
-    filterBtns.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const filter = this.getAttribute('data-filter');
-            
-            // Update active button
-            filterBtns.forEach(b => b.classList.remove('active'));
-            this.classList.add('active');
-            
-            // Filter books
-            bookCards.forEach(card => {
-                const status = card.getAttribute('data-status');
-                if (filter === 'all' || status === filter) {
-                    card.classList.remove('hidden');
-                } else {
-                    card.classList.add('hidden');
-                }
-            });
-        });
-    });
-});
