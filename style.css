@@ -68,10 +68,9 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 2rem 4rem;
-    min-height: calc(100vh - 10 0px);
+    min-height: calc(100vh - 100px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
 }
 
 /* Page Load Animation */
@@ -109,12 +108,13 @@ body {
 
 .tab-content.active {
     display: block;
+    opacity: 1;
 }
 
 /* Hero Section */
 .hero {
     text-align: center;
-    padding: 12rem 0;
+    padding: 12rem 0 18rem;
 }
 
 .name {
