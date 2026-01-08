@@ -1,5 +1,8 @@
 // Tab switching functionality
 document.addEventListener('DOMContentLoaded', function() {
+    // Scroll to top on page load/refresh
+    window.scrollTo(0, 0);
+    
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -244,7 +247,7 @@ function loadAllProjects() {
     container.innerHTML = html;
 }
 
-// Load ALL books for Reading tab
+// Load ALL books for Reading tab (blog-style layout)
 function loadAllBooks() {
     const container = document.getElementById('books-grid');
     if (!container) return;
@@ -256,25 +259,20 @@ function loadAllBooks() {
     
     let html = '';
     books.forEach(book => {
-        const sizeClass = book.size ? `card-${book.size}` : '';
         const statusEmoji = book.status === 'reading' ? '📖' : book.status === 'completed' ? '✅' : '📋';
         const statusText = book.status === 'reading' ? 'Reading' : book.status === 'completed' ? 'Completed' : 'Want to Read';
-        const showCover = book.size === 'featured' || book.size === 'wide';
+        const thumbnail = book.thumbnail || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
         
         html += `
-            <div class="book-card content-card ${sizeClass}" data-status="${book.status}">
-                ${showCover ? `
-                    <div class="book-cover" style="background: ${book.thumbnail};">
-                        <span class="book-status-badge ${book.status === 'want' ? 'want' : ''}">${statusEmoji} ${statusText}</span>
-                    </div>
-                ` : (book.thumbnail && book.size === 'small' ? `<div class="book-cover-mini" style="background: ${book.thumbnail};"></div>` : '')}
-                <div class="card-content">
+            <article class="book-card" data-status="${book.status}">
+                <div class="book-thumbnail" style="background: ${thumbnail};"></div>
+                <div class="book-card-content">
+                    <span class="book-status-tag ${book.status}">${statusEmoji} ${statusText}</span>
                     <h3>${book.title}</h3>
-                    <p class="book-author">${book.author}</p>
+                    <p class="book-author">by ${book.author}</p>
                     ${book.note ? `<p class="book-note">${book.note}</p>` : ''}
-                    ${!showCover ? `<span class="book-status ${book.status === 'want' ? 'want' : ''}">${statusEmoji} ${book.status === 'completed' ? 'Done' : statusText}</span>` : ''}
                 </div>
-            </div>
+            </article>
         `;
     });
     
