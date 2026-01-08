@@ -17,10 +17,11 @@
     <nav class="nav-container">
         <div class="nav-tabs">
             <button class="tab-btn active" data-tab="home">Home</button>
-            <button class="tab-btn" data-tab="about">About</button>
-            <button class="tab-btn" data-tab="work">Work</button>
+            <button class="tab-btn" data-tab="projects">Projects</button>
             <button class="tab-btn" data-tab="blog">Blog</button>
-            <button class="tab-btn" data-tab="contact">Contact</button>
+            <button class="tab-btn" data-tab="reading">Reading</button>
+            <button class="tab-btn" data-tab="hobbies">Hobbies</button>
+            <button class="tab-btn" data-tab="about">About</button>
         </div>
     </nav>
 
@@ -31,7 +32,7 @@
             <div class="hero">
                 <h1 class="name">Rifky Maulana</h1>
                 <p class="tagline">is currently a Tifosi, a supporter of Manchester United<br>and accidentally become a software engineer who try to be a <span class="emphasis-creative">(Creative)</span> Problem Solver.
-                I'd also want to be a consistent reader and writer<br>(hence why this blog is created) <br> I love to cook and playing dota in my free time <span class="emphasis-fun">(if i have any)</span></p>
+                <br>I'd also want to be a consistent reader and writer (hence why this blog is created) <br> I love to cook and playing dota in my free time <span class="emphasis-fun">(if i have any)</span></p>
                 <p></p>
                 <!-- need to think where this one goes, bcs now its looks too crowded ? -->
                 <!-- <div class="social-links">
@@ -58,7 +59,7 @@
                 <section class="recent-section">
                     <div class="section-header">
                         <h2>Recent Projects</h2>
-                        <button class="view-all" data-tab="work">View All →</button>
+                        <button class="view-all" data-tab="projects">View All →</button>
                     </div>
                     <div id="recent-projects" class="content-grid">
                         <!-- Bento-style cards with varied sizes -->
@@ -153,9 +154,9 @@
             </p>
         </section>
 
-        <!-- Work Section -->
-        <section id="work" class="tab-content">
-            <h2>Selected Work</h2>
+        <!-- Projects Section -->
+        <section id="projects" class="tab-content">
+            <h2>Projects</h2>
             <div class="work-grid">
                 <div class="work-item">
                     <div class="work-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
@@ -215,13 +216,148 @@
             </div>
         </section>
 
-        <!-- Contact Section -->
-        <section id="contact" class="tab-content">
-            <h2>Get in Touch</h2>
-            <p class="contact-intro">Feel free to reach out if you want to collaborate or just chat.</p>
-            <div class="contact-info">
-                <p><strong>Email:</strong> your.email@example.com</p>
-                <p><strong>Location:</strong> Jakarta, Indonesia</p>
+        <!-- Reading Section -->
+        <section id="reading" class="tab-content">
+            <h2>Reading List</h2>
+            <p class="section-intro">Books I've read and ones on my list 📚</p>
+            
+            <div class="reading-filter">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="reading">Currently Reading</button>
+                <button class="filter-btn" data-filter="completed">Completed</button>
+                <button class="filter-btn" data-filter="want">Want to Read</button>
+            </div>
+            
+            <div class="books-grid content-grid">
+                <!-- Currently Reading -->
+                <div class="book-card content-card card-featured" data-status="reading">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <span class="book-status-badge">📖 Reading</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Atomic Habits</h3>
+                        <p class="book-author">James Clear</p>
+                        <p class="book-note">Currently on chapter 12. Life-changing concepts!</p>
+                    </div>
+                </div>
+                
+                <!-- Completed Books -->
+                <div class="book-card content-card card-small" data-status="completed">
+                    <div class="book-cover-mini" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"></div>
+                    <div class="card-content">
+                        <h3>The Pragmatic Programmer</h3>
+                        <p class="book-author">Hunt & Thomas</p>
+                        <span class="book-status">✅ Completed</span>
+                    </div>
+                </div>
+                
+                <div class="book-card content-card card-small" data-status="completed">
+                    <div class="book-cover-mini" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="card-content">
+                        <h3>Clean Code</h3>
+                        <p class="book-author">Robert C. Martin</p>
+                        <span class="book-status">✅ Completed</span>
+                    </div>
+                </div>
+                
+                <div class="book-card content-card card-wide" data-status="want">
+                    <div class="book-cover" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <span class="book-status-badge want">📋 Want to Read</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Designing Data-Intensive Applications</h3>
+                        <p class="book-author">Martin Kleppmann</p>
+                        <p class="book-note">Recommended by many senior engineers</p>
+                    </div>
+                </div>
+                
+                <div class="book-card content-card card-small" data-status="want">
+                    <div class="card-content">
+                        <h3>System Design Interview</h3>
+                        <p class="book-author">Alex Xu</p>
+                        <span class="book-status want">📋 Want</span>
+                    </div>
+                </div>
+                
+                <div class="book-card content-card card-small" data-status="completed">
+                    <div class="card-content">
+                        <h3>You Don't Know JS</h3>
+                        <p class="book-author">Kyle Simpson</p>
+                        <span class="book-status">✅ Done</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Hobbies Section -->
+        <section id="hobbies" class="tab-content">
+            <h2>Hobbies & Interests</h2>
+            <p class="section-intro">Things I enjoy doing outside of coding 🎮</p>
+            
+            <div class="hobbies-grid content-grid">
+                <!-- Gaming - Featured -->
+                <div class="hobby-card content-card card-featured">
+                    <div class="hobby-cover" style="background: linear-gradient(135deg, #e52d27 0%, #b31217 100%);">
+                        <span class="hobby-icon">🎮</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Dota 2</h3>
+                        <p>Ancient rank player. Main pos 4/5 support. 3000+ hours and counting...</p>
+                        <div class="hobby-tags">
+                            <span class="tech-tag">Gaming</span>
+                            <span class="tech-tag">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Cooking -->
+                <div class="hobby-card content-card card-wide">
+                    <div class="hobby-cover" style="background: linear-gradient(135deg, #f5af19 0%, #f12711 100%);">
+                        <span class="hobby-icon">🍳</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>Cooking</h3>
+                        <p>Love experimenting with Indonesian & Asian cuisines. Specialty: Nasi Goreng!</p>
+                        <div class="hobby-tags">
+                            <span class="tech-tag">Food</span>
+                            <span class="tech-tag">Creative</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Photography -->
+                <div class="hobby-card content-card card-small">
+                    <div class="card-content">
+                        <span class="hobby-icon-small">📷</span>
+                        <h3>Photography</h3>
+                        <p>Street & landscape shots</p>
+                    </div>
+                </div>
+                
+                <!-- More hobbies -->
+                <div class="hobby-card content-card card-small">
+                    <div class="card-content">
+                        <span class="hobby-icon-small">⚽</span>
+                        <h3>Football</h3>
+                        <p>Man United fan!</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-card content-card card-small">
+                    <div class="card-content">
+                        <span class="hobby-icon-small">🏎️</span>
+                        <h3>F1</h3>
+                        <p>Tifosi 🇮🇹</p>
+                    </div>
+                </div>
+                
+                <div class="hobby-card content-card card-small">
+                    <div class="card-content">
+                        <span class="hobby-icon-small">☕</span>
+                        <h3>Coffee</h3>
+                        <p>V60 enthusiast</p>
+                    </div>
+                </div>
             </div>
         </section>
     </main>

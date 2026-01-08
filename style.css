@@ -68,7 +68,7 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 6rem 2rem 4rem;
-    min-height: calc(150vh - 150px);
+    min-height: calc(100vh - 10 0px);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -485,7 +485,7 @@ footer {
     }
     
     .container {
-        padding: 5rem 1.5rem 3rem;
+        padding: 12rem 1.5rem 3rem;
     }
     
     h2 {
@@ -829,4 +829,153 @@ footer {
         flex-direction: row;
         align-items: center;
     }
+}
+
+/* ========================================
+   READING SECTION STYLES
+   ======================================== */
+
+.section-intro {
+    color: #666;
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+/* Filter Buttons */
+.reading-filter {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #f5f5f5;
+    border: 1px solid #eee;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: #666;
+}
+
+.filter-btn:hover {
+    background: #eee;
+    color: #333;
+}
+
+.filter-btn.active {
+    background: #333;
+    color: #fff;
+    border-color: #333;
+}
+
+/* Book Cards */
+.books-grid {
+    margin-top: 1rem;
+}
+
+.book-card {
+    position: relative;
+}
+
+.book-cover {
+    width: 100%;
+    min-height: 120px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 0.75rem;
+    position: relative;
+}
+
+.book-cover-mini {
+    width: 100%;
+    height: 60px;
+}
+
+.book-status-badge {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 0.3rem 0.6rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.book-status-badge.want {
+    background: rgba(255, 193, 7, 0.9);
+    color: #333;
+}
+
+.book-author {
+    color: #888;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+}
+
+.book-note {
+    font-size: 0.8rem;
+    color: #666;
+    font-style: italic;
+}
+
+.book-status {
+    font-size: 0.75rem;
+    color: #4caf50;
+    font-weight: 500;
+}
+
+.book-status.want {
+    color: #ff9800;
+}
+
+/* ========================================
+   HOBBIES SECTION STYLES
+   ======================================== */
+
+.hobbies-grid {
+    margin-top: 1rem;
+}
+
+.hobby-card {
+    position: relative;
+}
+
+.hobby-cover {
+    width: 100%;
+    min-height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.hobby-icon {
+    font-size: 3rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+.hobby-icon-small {
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.hobby-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+}
+
+.hobby-tags .tech-tag {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.5rem;
+}
+
+/* Hide filtered books */
+.book-card.hidden {
+    display: none;
 }
