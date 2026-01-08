@@ -30,12 +30,12 @@ const books = [
     
     // Completed Books
     {
-        id: 'pragmatic-programmer',
-        title: 'The Pragmatic Programmer',
-        author: 'Hunt & Thomas',
+        id: 'the-alchemist',
+        title: 'The Alchemist',
+        author: 'Paulo Coelho',
         status: 'completed',
-        thumbnail: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
-        rating: 5
+        thumbnail: 'books/images/the-alchemist.png',
+        rating: 9
     },
     {
         id: 'clean-code',
