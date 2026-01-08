@@ -605,7 +605,7 @@ footer {
 }
 
 .content-card.card-small {
-    /* default single cell */
+    min-height: auto;
 }
 
 .content-card:hover {
