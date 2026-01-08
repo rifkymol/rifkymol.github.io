@@ -19,27 +19,27 @@
 
 const projects = [
     {
-        id: 'ecommerce-platform',
-        title: 'E-Commerce Platform',
-        description: 'Full-stack web application built with modern technologies. Features user auth, real-time inventory, and seamless checkout.',
-        thumbnail: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        tags: ['React', 'Node.js', 'MongoDB'],
-        link: '#',
-        github: 'https://github.com/rifkymol'
+        id: 'motionboard',
+        title: 'MotionBoard',
+        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for Astra Honda Motor',
+        thumbnail: 'projects/images/motionboard.png',
+        tags: ['Business Intelligence'],
+        link: 'https://www.wingarc.com/en/product/motionboard/',
     },
     {
-        id: 'task-manager',
-        title: 'Task Manager',
-        description: 'Real-time collaboration tool for managing tasks and projects with team members.',
-        thumbnail: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        tags: ['Vue.js', 'Firebase']
+        id: 'workflow',
+        title: 'Workflow',
+        description: 'Built a real-time warehouse approval system as part of an internal logistics management tool to streamline operations and improve efficiency. working as a back-end developer using Express.js, and MySQL.',
+        thumbnail: 'projects/images/workflow.png',
+        tags: ['Next.js', 'Express.js', 'MySQL'],
     },
     {
-        id: 'weather-app',
-        title: 'Weather App',
-        description: 'Beautiful data visualization app showing weather forecasts with charts and maps.',
+        id: 'f1-leaderboard',
+        title: 'F1 Leaderboard',
+        description: 'A web app that displays the current Formula 1 season standings using the FastAPI. Built with Python and streamlit.',
         thumbnail: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        tags: ['API', 'JavaScript']
+        tags: ['API', 'Python', 'Streamlit'],
+        github: ''
     },
     {
         id: 'portfolio-website',
