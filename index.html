@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Name - Portfolio</title>
+    <title>Rifky Maulana - Web Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Markdown parser -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -26,12 +30,114 @@
         <section id="home" class="tab-content active">
             <div class="hero">
                 <h1 class="name">Rifky Maulana</h1>
-                <p class="tagline">Back End Developer & Creative Problem Solver</p>
-                <div class="social-links">
-                    <a href="https://github.com/rifkymol" target="_blank">GitHub</a>
-                    <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
-                    <a href="mailto:your.email@example.com">Email</a>
-                </div>
+                <p class="tagline">is currently a Tifosi, a supporter of Manchester United<br>and accidentally become a software engineer who try to be a <span class="emphasis-creative">(Creative)</span> Problem Solver.
+                I'd also want to be a consistent reader and writer<br>(hence why this blog is created) <br> I love to cook and playing dota in my free time <span class="emphasis-fun">(if i have any)</span></p>
+                <p></p>
+                <!-- need to think where this one goes, bcs now its looks too crowded ? -->
+                <!-- <div class="social-links">
+                    <div class="icon-text-container">
+                        <a href="https://github.com/rifkymol" target="_blank">
+                            <i class="fa fa-github icon" style="font-size:24px"></i><br>GitHub
+                        </a>
+                    </div>
+                    <div class="icon-text-container">
+                        <a href="https://linkedin.com/in/rifky-maulana-4b67b174/" target="_blank">
+                            <i class="fa fa-linkedin icon" style="font-size:24px"></i><br>LinkedIn
+                        </a>
+                    </div>
+                    <div class="icon-text-container">
+                        <a href="mailto:rifkymaulana123@gmail.com">
+                            <i class="fa fa-envelope icon" style="font-size:24px"></i><br>Email
+                        </a>
+                    </div>
+                </div> -->
+            </div>
+            
+            <!-- Recent Content Section -->
+            <div class="recent-content">
+                <section class="recent-section">
+                    <div class="section-header">
+                        <h2>Recent Projects</h2>
+                        <button class="view-all" data-tab="work">View All →</button>
+                    </div>
+                    <div id="recent-projects" class="content-grid">
+                        <!-- Bento-style cards with varied sizes -->
+                        <div class="content-card card-featured">
+                            <div class="card-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <div class="card-content">
+                                <h3>E-Commerce Platform</h3>
+                                <p>Full-stack web application built with modern technologies. Features user auth, real-time inventory, and seamless checkout.</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">React</span>
+                                    <span class="tech-tag">Node.js</span>
+                                    <span class="tech-tag">MongoDB</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-card card-small">
+                            <div class="card-content">
+                                <h3>Task Manager</h3>
+                                <p>Real-time collab tool</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">Vue.js</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-card card-small">
+                            <div class="card-content">
+                                <h3>Weather App</h3>
+                                <p>Data visualization</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">API</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-card card-wide">
+                            <div class="card-thumbnail" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);"></div>
+                            <div class="card-content">
+                                <h3>Portfolio Website</h3>
+                                <p>This website! Clean design with smooth animations.</p>
+                                <div class="tech-stack">
+                                    <span class="tech-tag">HTML</span>
+                                    <span class="tech-tag">CSS</span>
+                                    <span class="tech-tag">JS</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section class="recent-section">
+                    <div class="section-header">
+                        <h2>Latest Blog Posts</h2>
+                        <button class="view-all" data-tab="blog">View All →</button>
+                    </div>
+                    <div id="recent-blogs" class="content-grid">
+                        <!-- Bento-style blog cards -->
+                        <div class="content-card card-wide">
+                            <div class="card-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                            <div class="card-content">
+                                <p class="post-date">Jan 7, 2026</p>
+                                <h3>My First Blog Post</h3>
+                                <p>A quick introduction to what I'll be writing about on this blog...</p>
+                            </div>
+                        </div>
+                        <div class="content-card card-small">
+                            <div class="card-content">
+                                <p class="post-date">Jan 5, 2026</p>
+                                <h3>Learning Python</h3>
+                                <p>My journey so far</p>
+                            </div>
+                        </div>
+                        <div class="content-card card-small">
+                            <div class="card-content">
+                                <p class="post-date">Coming Soon</p>
+                                <h3>More Posts</h3>
+                                <p>Stay tuned! ✨</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </section>
 
@@ -52,19 +158,43 @@
             <h2>Selected Work</h2>
             <div class="work-grid">
                 <div class="work-item">
-                    <h3>Project Name</h3>
-                    <p>Brief description of what this project does and the technologies used.</p>
-                    <a href="#" class="project-link">View Project →</a>
+                    <div class="work-thumbnail" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);"></div>
+                    <div class="work-item-content">
+                        <h3>E-Commerce Platform</h3>
+                        <p>Full-stack web application built with React and Node.js. Features include user authentication, product catalog, and payment integration.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">React</span>
+                            <span class="tech-tag">Node.js</span>
+                            <span class="tech-tag">MongoDB</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
                 </div>
                 <div class="work-item">
-                    <h3>Another Project</h3>
-                    <p>Brief description of what this project does and the technologies used.</p>
-                    <a href="#" class="project-link">View Project →</a>
+                    <div class="work-thumbnail" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);"></div>
+                    <div class="work-item-content">
+                        <h3>Task Management App</h3>
+                        <p>Productivity tool with real-time collaboration features. Built with modern web technologies and WebSocket for live updates.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">Vue.js</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Tailwind</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
                 </div>
                 <div class="work-item">
-                    <h3>Cool Project</h3>
-                    <p>Brief description of what this project does and the technologies used.</p>
-                    <a href="#" class="project-link">View Project →</a>
+                    <div class="work-thumbnail" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);"></div>
+                    <div class="work-item-content">
+                        <h3>Weather Dashboard</h3>
+                        <p>Interactive weather application with data visualization. Integrates multiple weather APIs for accurate forecasts.</p>
+                        <div class="tech-stack">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">Chart.js</span>
+                            <span class="tech-tag">API</span>
+                        </div>
+                        <a href="#" class="project-link">View Project →</a>
+                    </div>
                 </div>
             </div>
         </section>
@@ -98,7 +228,7 @@
 
     <!-- Footer -->
     <footer>
-        <p>© 2026 Your Name</p>
+        <p>© 2026 Rifky Maulana</p>
     </footer>
 
     <script src="blog-config.js"></script>
