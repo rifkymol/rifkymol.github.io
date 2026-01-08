@@ -1,7 +1,7 @@
 /**
  * Hobbies Configuration
  * =====================
- * Tambah hobby baru? Edit array di bawah ini!
+ * Add new hobbies here!
  * 
  * Format:
  * {
@@ -9,67 +9,54 @@
  *   title: 'Hobby Name',
  *   description: 'Description',
  *   icon: 'Emoji icon',
- *   thumbnail: 'CSS gradient (optional)',
- *   tags: ['Tag1', 'Tag2'],
- *   size: 'featured'|'wide'|'small'
+ *   thumbnail: 'hobbies/images/my-hobby.jpg' OR 'linear-gradient(...)'
  * }
+ * 
+ * Images: Store in hobbies/images/ folder
  */
 
 const hobbies = [
-    // Gaming - Featured
     {
         id: 'dota2',
         title: 'Dota 2',
         description: 'Ancient rank player. Main pos 4/5 support. 3000+ hours and counting...',
         icon: '🎮',
-        thumbnail: 'linear-gradient(135deg, #e52d27 0%, #b31217 100%)',
-        tags: ['Gaming', 'Strategy'],
-        size: 'featured'
+        thumbnail: 'linear-gradient(135deg, #e52d27 0%, #b31217 100%)'
     },
-    
-    // Cooking - Wide
     {
         id: 'cooking',
         title: 'Cooking',
         description: 'Love experimenting with Indonesian & Asian cuisines. Specialty: Nasi Goreng!',
         icon: '🍳',
-        thumbnail: 'linear-gradient(135deg, #f5af19 0%, #f12711 100%)',
-        tags: ['Food', 'Creative'],
-        size: 'wide'
+        thumbnail: 'linear-gradient(135deg, #f5af19 0%, #f12711 100%)'
     },
-    
-    // Small hobbies
     {
         id: 'photography',
         title: 'Photography',
-        description: 'Street & landscape shots',
+        description: 'Street & landscape shots. Always looking for the perfect lighting.',
         icon: '📷',
-        tags: ['Art'],
-        size: 'small'
+        thumbnail: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
     },
     {
         id: 'football',
         title: 'Football',
-        description: 'Man United fan!',
+        description: 'Manchester United fan since childhood. Glory glory Man United!',
         icon: '⚽',
-        tags: ['Sports'],
-        size: 'small'
+        thumbnail: 'linear-gradient(135deg, #DA291C 0%, #000000 100%)'
     },
     {
         id: 'f1',
-        title: 'F1',
-        description: 'Tifosi 🇮🇹',
+        title: 'Formula 1',
+        description: 'Tifosi 🇮🇹 - Supporting Ferrari through the ups and downs!',
         icon: '🏎️',
-        tags: ['Sports'],
-        size: 'small'
+        thumbnail: 'linear-gradient(135deg, #DC0000 0%, #FFD800 100%)'
     },
     {
         id: 'coffee',
         title: 'Coffee',
-        description: 'V60 enthusiast',
+        description: 'V60 enthusiast. Currently exploring single origin beans from Indonesia.',
         icon: '☕',
-        tags: ['Food'],
-        size: 'small'
+        thumbnail: 'linear-gradient(135deg, #6F4E37 0%, #C4A77D 100%)'
     }
 ];
 

@@ -1,5 +1,21 @@
-// Blog posts configuration
-// Tambahkan artikel baru di sini
+/**
+ * Blog Posts Configuration
+ * ========================
+ * Add new blog posts here!
+ * 
+ * Format:
+ * {
+ *   id: 'unique-id',
+ *   title: 'Post Title',
+ *   date: 'YYYY-MM-DD',
+ *   excerpt: 'Short description...',
+ *   thumbnail: 'blog/images/my-image.jpg' OR 'linear-gradient(...)',
+ *   file: 'blog/post-name.md'
+ * }
+ * 
+ * Images: Store in blog/images/ folder
+ * Posts: Store .md files in blog/ folder
+ */
 const blogPosts = [
     {
         id: "first-blog-post",

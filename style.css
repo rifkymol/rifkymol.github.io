@@ -5,6 +5,11 @@
     box-sizing: border-box;
 }
 
+html {
+  /* Reserves space for the scrollbar, preventing layout shift */
+  scrollbar-gutter: stable;
+}
+
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
     line-height: 1.6;
@@ -694,14 +699,18 @@ footer {
     color: #666;
 }
 
-/* Work Grid - Updated with thumbnails */
+/* ========================================
+   PROJECTS SECTION - Consistent card layout
+   ======================================== */
+.projects-grid,
 .work-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
+.project-card,
 .work-item {
     background: #fff;
     border-radius: 12px;
@@ -710,40 +719,52 @@ footer {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.project-card:hover,
 .work-item:hover {
     transform: translateY(-8px);
     box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
 }
 
+.project-thumbnail,
 .work-thumbnail {
     width: 100%;
-    height: 220px;
+    height: 180px;
     background-size: cover;
     background-position: center;
 }
 
+.project-card-content,
 .work-item-content {
-    padding: 2rem;
+    padding: 1.5rem;
 }
 
+.project-card-content h3,
 .work-item-content h3 {
-    font-size: 1.4rem;
-    margin-bottom: 1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.75rem;
     color: #000;
     font-weight: 600;
 }
 
+.project-card-content p,
 .work-item-content p {
     color: #666;
     line-height: 1.6;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
 }
 
-/* Blog Grid - Updated with thumbnails */
+.project-links {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+/* Blog Grid - Consistent card layout */
 .blog-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
@@ -763,13 +784,13 @@ footer {
 
 .blog-thumbnail {
     width: 100%;
-    height: 200px;
+    height: 180px;
     background-size: cover;
     background-position: center;
 }
 
 .blog-card-content {
-    padding: 1.75rem;
+    padding: 1.5rem;
 }
 
 .blog-card-content h3 {
@@ -793,36 +814,21 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    .content-grid {
+    .projects-grid,
+    .work-grid,
+    .blog-grid,
+    .books-grid,
+    .hobbies-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-    
-    .content-card.card-featured,
-    .content-card.card-wide {
-        grid-column: span 2;
-    }
-    
-    .content-card.card-featured {
-        grid-row: span 1;
     }
 }
 
 @media (max-width: 480px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .content-card.card-featured,
-    .content-card.card-wide {
-        grid-column: span 1;
-    }
-    
-    .work-grid {
-        grid-template-columns: 1fr;
-    }
-    
+    .projects-grid,
+    .work-grid,
     .blog-grid,
-    .books-grid {
+    .books-grid,
+    .hobbies-grid {
         grid-template-columns: 1fr;
     }
     
@@ -872,11 +878,11 @@ footer {
     border-color: #333;
 }
 
-/* Book Cards - Same as Blog Layout */
+/* Book Cards - Consistent card layout */
 .books-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 2.5rem;
+    gap: 2rem;
     margin-top: 2rem;
 }
 
@@ -948,56 +954,69 @@ footer {
     line-height: 1.5;
 }
 
+.book-rating {
+    margin-top: 0.5rem;
+    font-size: 0.9rem;
+}
+
 /* Hide filtered books */
 .book-card.hidden {
     display: none;
 }
 
 /* ========================================
-   HOBBIES SECTION STYLES
+   HOBBIES SECTION - Consistent card layout
    ======================================== */
 
 .hobbies-grid {
-    margin-top: 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .hobby-card {
-    position: relative;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hobby-cover {
+.hobby-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+}
+
+.hobby-thumbnail {
     width: 100%;
-    min-height: 100px;
+    height: 180px;
+    background-size: cover;
+    background-position: center;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
-.hobby-icon {
-    font-size: 3rem;
-    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+.hobby-icon-overlay {
+    font-size: 3.5rem;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
 }
 
-.hobby-icon-small {
-    font-size: 1.5rem;
-    display: block;
+.hobby-card-content {
+    padding: 1.5rem;
+}
+
+.hobby-card-content h3 {
+    font-size: 1.2rem;
     margin-bottom: 0.5rem;
+    color: #000;
+    font-weight: 600;
 }
 
-.hobby-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem;
-    margin-top: 0.5rem;
-}
-
-.hobby-tags .tech-tag {
-    font-size: 0.7rem;
-    padding: 0.2rem 0.5rem;
-}
-
-/* Hide filtered books */
-.book-card.hidden {
-    display: none;
+.hobby-card-content p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.6;
 }
