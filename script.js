@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadRecentContent();
         loadAllProjects();
         loadAllBooks();
-        loadAllHobbies();
+        loadPhotographyGallery();
     }, 100);
 
     tabButtons.forEach(button => {
@@ -196,6 +196,7 @@ document.addEventListener('DOMContentLoaded', function() {
 function loadRecentContent() {
     loadRecentProjects();
     loadRecentBlogs();
+    loadRecentPhotos();
 }
 
 // Load recent projects for homepage (first 3)
@@ -327,102 +328,82 @@ function attachBookFilterListeners() {
 }
 
 // Load ALL hobbies for Hobbies tab (consistent card layout)
-function loadAllHobbies() {
-    const container = document.getElementById('hobbies-grid');
+// Load Photography Gallery (main tab)
+function loadPhotographyGallery() {
+    const container = document.getElementById('photography-grid');
     if (!container) return;
     
-    if (typeof hobbies === 'undefined' || hobbies.length === 0) {
-        container.innerHTML = '<p>No hobbies yet.</p>';
+    // Find photography hobby from config
+    const photography = hobbies.find(h => h.id === 'photography');
+    
+    if (!photography || !photography.gallery || photography.gallery.length === 0) {
+        container.innerHTML = '<p class="no-photos">No photos yet.</p>';
         return;
     }
     
+    // Store current gallery for lightbox navigation
+    window.currentGallery = photography.gallery;
+    window.currentGalleryIndex = 0;
+    
     let html = '';
-    hobbies.forEach(hobby => {
-        const thumbnailStyle = getThumbnailStyle(hobby.thumbnail);
-        const isGallery = hobby.type === 'gallery';
-        
+    photography.gallery.forEach((photo, index) => {
         html += `
-            <article class="hobby-card ${isGallery ? 'hobby-gallery-card' : ''}" data-hobby-id="${hobby.id}">
-                <div class="hobby-thumbnail" style="${thumbnailStyle}">
-                    <span class="hobby-icon-overlay">${hobby.icon}</span>
-                </div>
-                <div class="hobby-card-content">
-                    <h3>${hobby.title}</h3>
-                    <p>${hobby.description}</p>
-                    ${isGallery && hobby.gallery && hobby.gallery.length > 0 ? `<span class="gallery-indicator">📸 ${hobby.gallery.length} photos</span>` : ''}
-                </div>
-            </article>
+            <div class="gallery-item" data-index="${index}">
+                <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
+            </div>
         `;
     });
     
     container.innerHTML = html;
     
-    // Add click listeners for gallery hobbies
-    document.querySelectorAll('.hobby-gallery-card').forEach(card => {
-        card.addEventListener('click', function() {
-            const hobbyId = this.getAttribute('data-hobby-id');
-            const hobby = hobbies.find(h => h.id === hobbyId);
-            if (hobby && hobby.type === 'gallery') {
-                openGalleryView(hobby);
-            }
+    // Add click listeners for lightbox
+    container.querySelectorAll('.gallery-item').forEach(item => {
+        item.addEventListener('click', function() {
+            const index = parseInt(this.getAttribute('data-index'));
+            openLightbox(index);
         });
     });
 }
 
-// Open gallery view for a hobby
-function openGalleryView(hobby) {
-    const listView = document.getElementById('hobbies-list-view');
-    const galleryView = document.getElementById('gallery-view');
-    const galleryTitle = document.getElementById('gallery-title');
-    const galleryGrid = document.getElementById('gallery-grid');
+// Load recent photos preview for home page
+function loadRecentPhotos() {
+    const container = document.getElementById('recent-photos');
+    if (!container) return;
     
-    if (!listView || !galleryView || !galleryGrid) return;
+    // Find photography hobby from config
+    const photography = hobbies.find(h => h.id === 'photography');
     
-    // Store current gallery for lightbox navigation
-    window.currentGallery = hobby.gallery || [];
-    window.currentGalleryIndex = 0;
-    
-    galleryTitle.textContent = `${hobby.icon} ${hobby.title}`;
-    
-    if (!hobby.gallery || hobby.gallery.length === 0) {
-        galleryGrid.innerHTML = '<p class="no-photos">No photos yet. Add some to hobbies-config.js!</p>';
-    } else {
-        let html = '';
-        hobby.gallery.forEach((photo, index) => {
-            html += `
-                <div class="gallery-item" data-index="${index}">
-                    <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
-                </div>
-            `;
-        });
-        galleryGrid.innerHTML = html;
-        
-        // Add click listeners for lightbox
-        document.querySelectorAll('.gallery-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const index = parseInt(this.getAttribute('data-index'));
-                openLightbox(index);
-            });
-        });
+    if (!photography || !photography.gallery || photography.gallery.length === 0) {
+        container.innerHTML = '<p>No photos yet.</p>';
+        return;
     }
     
-    listView.style.display = 'none';
-    galleryView.style.display = 'block';
-    window.scrollTo(0, 0);
+    // Get first 6 photos for preview
+    const previewPhotos = photography.gallery.slice(0, 6);
+    
+    let html = '';
+    previewPhotos.forEach((photo, index) => {
+        html += `
+            <div class="gallery-preview-item" data-index="${index}">
+                <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
+            </div>
+        `;
+    });
+    
+    container.innerHTML = html;
+    
+    // Add click listeners for lightbox (using main gallery)
+    container.querySelectorAll('.gallery-preview-item').forEach(item => {
+        item.addEventListener('click', function() {
+            window.currentGallery = photography.gallery;
+            const index = parseInt(this.getAttribute('data-index'));
+            openLightbox(index);
+        });
+    });
 }
 
-// Back to hobbies list
+// Lightbox controls setup
 document.addEventListener('DOMContentLoaded', function() {
-    const backBtn = document.getElementById('back-to-hobbies');
-    if (backBtn) {
-        backBtn.addEventListener('click', function() {
-            document.getElementById('hobbies-list-view').style.display = 'block';
-            document.getElementById('gallery-view').style.display = 'none';
-            window.scrollTo(0, 0);
-        });
-    }
-    
-    // Lightbox controls
     const lightbox = document.getElementById('lightbox');
     const closeBtn = document.querySelector('.lightbox-close');
     const prevBtn = document.querySelector('.lightbox-prev');
