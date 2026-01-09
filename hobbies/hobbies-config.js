@@ -31,9 +31,9 @@
 
 const hobbies = [
     {
-        id: 'dota2',
-        title: 'Dota 2',
-        description: 'Turbo Enjoyer and NOT playing ranked. Favorite hero: Phantom Assassin!',
+        id: 'gaming',
+        title: 'Gaming',
+        description: 'Competitive gamer and casual player. Favorite genres: RPG, Strategy, FPS.',
         icon: '🎮',
         thumbnail: 'linear-gradient(135deg, #e52d27 0%, #b31217 100%)'
     },
@@ -54,12 +54,25 @@ const hobbies = [
         gallery: [
             // Add your photos here! Example:
             { src: 'hobbies/images/20250719_151134.jpg', caption: 'Cafe', tags: ['Cafe'] },
-            { src: 'hobbies/images/A.jpg', caption: '', tags: [''] },
             { src: 'hobbies/images/Z.jpg', caption: '', tags: [''] },
             { src: 'hobbies/images/C.jpg', caption: '', tags: [''] },
             { src: 'hobbies/images/D.jpg', caption: '', tags: [''] },
             { src: 'hobbies/images/Z.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/A.jpg', caption: '', tags: [''] },
             { src: 'hobbies/images/G.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/H.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/I.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/J.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/K.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/L.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/M.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/N.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/O.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/P.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/Q.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/R.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/S.jpg', caption: '', tags: [''] },
+            { src: 'hobbies/images/T.jpg', caption: '', tags: [''] },
             // { src: 'hobbies/images/landscape-1.jpg', caption: 'Mountain sunrise', tags: ['Landscape'] },
         ]
     },
