@@ -339,21 +339,162 @@ function loadAllHobbies() {
     let html = '';
     hobbies.forEach(hobby => {
         const thumbnailStyle = getThumbnailStyle(hobby.thumbnail);
+        const isGallery = hobby.type === 'gallery';
         
         html += `
-            <article class="hobby-card">
+            <article class="hobby-card ${isGallery ? 'hobby-gallery-card' : ''}" data-hobby-id="${hobby.id}">
                 <div class="hobby-thumbnail" style="${thumbnailStyle}">
                     <span class="hobby-icon-overlay">${hobby.icon}</span>
                 </div>
                 <div class="hobby-card-content">
                     <h3>${hobby.title}</h3>
                     <p>${hobby.description}</p>
+                    ${isGallery && hobby.gallery && hobby.gallery.length > 0 ? `<span class="gallery-indicator">📸 ${hobby.gallery.length} photos</span>` : ''}
                 </div>
             </article>
         `;
     });
     
     container.innerHTML = html;
+    
+    // Add click listeners for gallery hobbies
+    document.querySelectorAll('.hobby-gallery-card').forEach(card => {
+        card.addEventListener('click', function() {
+            const hobbyId = this.getAttribute('data-hobby-id');
+            const hobby = hobbies.find(h => h.id === hobbyId);
+            if (hobby && hobby.type === 'gallery') {
+                openGalleryView(hobby);
+            }
+        });
+    });
+}
+
+// Open gallery view for a hobby
+function openGalleryView(hobby) {
+    const listView = document.getElementById('hobbies-list-view');
+    const galleryView = document.getElementById('gallery-view');
+    const galleryTitle = document.getElementById('gallery-title');
+    const galleryGrid = document.getElementById('gallery-grid');
+    
+    if (!listView || !galleryView || !galleryGrid) return;
+    
+    // Store current gallery for lightbox navigation
+    window.currentGallery = hobby.gallery || [];
+    window.currentGalleryIndex = 0;
+    
+    galleryTitle.textContent = `${hobby.icon} ${hobby.title}`;
+    
+    if (!hobby.gallery || hobby.gallery.length === 0) {
+        galleryGrid.innerHTML = '<p class="no-photos">No photos yet. Add some to hobbies-config.js!</p>';
+    } else {
+        let html = '';
+        hobby.gallery.forEach((photo, index) => {
+            html += `
+                <div class="gallery-item" data-index="${index}">
+                    <img src="${photo.src}" alt="${photo.caption || ''}" loading="lazy">
+                </div>
+            `;
+        });
+        galleryGrid.innerHTML = html;
+        
+        // Add click listeners for lightbox
+        document.querySelectorAll('.gallery-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const index = parseInt(this.getAttribute('data-index'));
+                openLightbox(index);
+            });
+        });
+    }
+    
+    listView.style.display = 'none';
+    galleryView.style.display = 'block';
+    window.scrollTo(0, 0);
+}
+
+// Back to hobbies list
+document.addEventListener('DOMContentLoaded', function() {
+    const backBtn = document.getElementById('back-to-hobbies');
+    if (backBtn) {
+        backBtn.addEventListener('click', function() {
+            document.getElementById('hobbies-list-view').style.display = 'block';
+            document.getElementById('gallery-view').style.display = 'none';
+            window.scrollTo(0, 0);
+        });
+    }
+    
+    // Lightbox controls
+    const lightbox = document.getElementById('lightbox');
+    const closeBtn = document.querySelector('.lightbox-close');
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    
+    if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+    if (prevBtn) prevBtn.addEventListener('click', () => navigateLightbox(-1));
+    if (nextBtn) nextBtn.addEventListener('click', () => navigateLightbox(1));
+    
+    // Close on background click
+    if (lightbox) {
+        lightbox.addEventListener('click', function(e) {
+            if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                closeLightbox();
+            }
+        });
+    }
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', function(e) {
+        if (!lightbox || lightbox.style.display !== 'flex') return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') navigateLightbox(-1);
+        if (e.key === 'ArrowRight') navigateLightbox(1);
+    });
+});
+
+// Open lightbox
+function openLightbox(index) {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    const caption = document.getElementById('lightbox-caption');
+    const tagsContainer = document.getElementById('lightbox-tags');
+    
+    if (!lightbox || !window.currentGallery || !window.currentGallery[index]) return;
+    
+    window.currentGalleryIndex = index;
+    const photo = window.currentGallery[index];
+    
+    img.src = photo.src;
+    caption.textContent = photo.caption || '';
+    caption.style.display = photo.caption ? 'block' : 'none';
+    
+    if (photo.tags && photo.tags.length > 0) {
+        tagsContainer.innerHTML = photo.tags.map(tag => `<span class="lightbox-tag">${tag}</span>`).join('');
+        tagsContainer.style.display = 'flex';
+    } else {
+        tagsContainer.style.display = 'none';
+    }
+    
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+}
+
+// Close lightbox
+function closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.style.display = 'none';
+        document.body.style.overflow = '';
+    }
+}
+
+// Navigate lightbox
+function navigateLightbox(direction) {
+    if (!window.currentGallery || window.currentGallery.length === 0) return;
+    
+    let newIndex = window.currentGalleryIndex + direction;
+    if (newIndex < 0) newIndex = window.currentGallery.length - 1;
+    if (newIndex >= window.currentGallery.length) newIndex = 0;
+    
+    openLightbox(newIndex);
 }
 
 // Load recent blog posts for homepage

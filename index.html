@@ -118,7 +118,7 @@
         <!-- Reading Section -->
         <section id="reading" class="tab-content">
             <h2>Reading List</h2>
-            <p class="section-intro">Books I've read and ones on my list 📚</p>
+            <p class="section-intro">Books I've read and ones on my list 📚 <br>Rate is from 1 to 5</p>
             
             <div class="reading-filter">
                 <button class="filter-btn active" data-filter="all">All</button>
@@ -135,25 +135,51 @@
         
         <!-- Hobbies Section -->
         <section id="hobbies" class="tab-content">
-            <h2>Hobbies & Interests</h2>
-            <p class="section-intro">Things I enjoy doing outside of coding 🎮</p>
+            <!-- Hobbies List View -->
+            <div id="hobbies-list-view">
+                <h2>Hobbies & Interests</h2>
+                <p class="section-intro">Things I enjoy doing outside of coding 🎮</p>
+                
+                <div id="hobbies-grid" class="hobbies-grid">
+                    <!-- Loaded dynamically from hobbies-config.js -->
+                    <p class="loading">Loading hobbies...</p>
+                </div>
+            </div>
             
-            <div id="hobbies-grid" class="hobbies-grid">
-                <!-- Loaded dynamically from hobbies-config.js -->
-                <p class="loading">Loading hobbies...</p>
+            <!-- Gallery View (for photography etc) -->
+            <div id="gallery-view" style="display: none;">
+                <button id="back-to-hobbies" class="back-btn">← Back to Hobbies</button>
+                <h2 id="gallery-title"></h2>
+                <div id="gallery-grid" class="gallery-masonry">
+                    <!-- Photos loaded dynamically -->
+                </div>
             </div>
         </section>
     </main>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <button class="lightbox-close">×</button>
+        <button class="lightbox-nav lightbox-prev">‹</button>
+        <button class="lightbox-nav lightbox-next">›</button>
+        <div class="lightbox-content">
+            <img id="lightbox-img" src="" alt="">
+            <div class="lightbox-info">
+                <p id="lightbox-caption"></p>
+                <div id="lightbox-tags"></div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer>
         <p>© 2026 Rifky Maulana</p>
     </footer>
 
-    <script src="projects-config.js"></script>
-    <script src="books-config.js"></script>
-    <script src="hobbies-config.js"></script>
-    <script src="blog-config.js"></script>
+    <script src="/projects/projects-config.js"></script>
+    <script src="/books/books-config.js"></script>
+    <script src="/hobbies/hobbies-config.js"></script>
+    <script src="/blog/blog-config.js"></script>
     <script src="script.js"></script>
 </body>
 </html>

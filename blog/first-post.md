@@ -1,6 +1,6 @@
 # My First Blog Post
 
-Welcome to my blog! This is my first post where I want to share my journey in tech and what I'll be writing about.
+Welcome to my blog! This is my first post where I want to share my journey in tech (or life) and what I'll be writing about.
 
 ## Why I Started This Blog
 
