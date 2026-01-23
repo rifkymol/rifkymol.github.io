@@ -42,6 +42,15 @@ const projects = [
         github: ''
     },
     {
+        id: 'evo-gym',
+        title: 'Evo Gym',
+        description: 'A frontend web template for Gym Company. Built with Typescript, React.js and Tailwind CSS.',
+        thumbnail: 'projects/images/evo-gym.png',
+        tags: ['React.js', 'TypeScript', 'Tailwind CSS'],
+        github: 'https://github.com/rifkymol/gym-typescript-react-tailwindcss',
+        link: 'https://gym-typescript-react-tailwindcss.pages.dev/'
+    },
+    {
         id: 'portfolio-website',
         title: 'Portfolio Website',
         description: 'This website! Clean design with smooth animations and dynamic content loading.',
