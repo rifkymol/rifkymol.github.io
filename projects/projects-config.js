@@ -34,14 +34,6 @@ const projects = [
         tags: ['Next.js', 'Express.js', 'MySQL'],
     },
     {
-        id: 'f1-leaderboard',
-        title: 'F1 Leaderboard',
-        description: 'A web app that displays the current Formula 1 season standings using the FastF1. Built with Python and streamlit.',
-        thumbnail: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        tags: ['API', 'Python', 'Streamlit'],
-        github: ''
-    },
-    {
         id: 'evo-gym',
         title: 'Evo Gym',
         description: 'A frontend web template for Gym Company. Built with Typescript, React.js and Tailwind CSS.',
@@ -49,6 +41,14 @@ const projects = [
         tags: ['React.js', 'TypeScript', 'Tailwind CSS'],
         github: 'https://github.com/rifkymol/gym-typescript-react-tailwindcss',
         link: 'https://gym-typescript-react-tailwindcss.pages.dev/'
+    },
+    {
+        id: 'f1-leaderboard',
+        title: 'F1 Leaderboard',
+        description: 'A web app that displays the current Formula 1 season standings using the FastF1. Built with Python and streamlit.',
+        thumbnail: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+        tags: ['API', 'Python', 'Streamlit'],
+        github: ''
     },
     {
         id: 'portfolio-website',
