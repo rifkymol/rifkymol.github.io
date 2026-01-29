@@ -21,7 +21,7 @@ const projects = [
     {
         id: 'motionboard',
         title: 'MotionBoard',
-        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for Astra Honda Motor',
+        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for Company in Indonesia',
         thumbnail: 'projects/images/motionboard.png',
         tags: ['Business Intelligence'],
         link: 'https://www.wingarc.com/en/product/motionboard/',
