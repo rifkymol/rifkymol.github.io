@@ -19,12 +19,12 @@
 
 const projects = [
     {
-        id: 'motionboard',
-        title: 'MotionBoard',
-        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for Astra Honda Motor',
-        thumbnail: 'projects/images/motionboard.png',
+        id: 'woowa',
+        title: 'Woo-wa',
+        description: 'Woo-wa is a Wordpress plugin for Woocommerce Order Notifications & Automatic Reminder via WhatsApp. Helping small-medium businesses to boost sales and improve customer engagement through automated WhatsApp notifications. I helped in developing website using WordPress and Elementor, I also developed the plugin.',
+        thumbnail: 'projects/images/woo-wa.png',
         tags: ['Business Intelligence'],
-        link: 'https://www.wingarc.com/en/product/motionboard/',
+        link: 'https://www.woo-wa.com',
     },
     {
         id: 'workflow',
@@ -57,7 +57,15 @@ const projects = [
         thumbnail: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
         tags: ['HTML', 'CSS', 'JS'],
         github: 'https://github.com/rifkymol/personal-website'
-    }
+    },
+    {
+        id: 'motionboard',
+        title: 'MotionBoard',
+        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for one of motorcycle company in Indonesia',
+        thumbnail: 'projects/images/motionboard.png',
+        tags: ['Business Intelligence'],
+        link: 'https://www.wingarc.com/en/product/motionboard/',
+    },
 ];
 
 // Export for use in other files (if using modules)
