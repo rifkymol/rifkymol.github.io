@@ -43,6 +43,14 @@ const projects = [
         link: 'https://gym-typescript-react-tailwindcss.pages.dev/'
     },
     {
+        id: 'resepkan',
+        title: 'Resepkan',
+        description: 'A web app that saves and organizes your favorite recipes. Built with Laravel and Vue.js.',
+        thumbnail: 'projects/images/resepkan.png',
+        tags: ['Laravel', 'Vue.js'],
+        github: ''
+    },
+    {
         id: 'f1-leaderboard',
         title: 'F1 Leaderboard',
         description: 'A web app that displays the current Formula 1 season standings using the FastF1. Built with Python and streamlit.',
