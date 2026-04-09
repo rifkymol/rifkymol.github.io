@@ -30,8 +30,15 @@ const books = [
         id: 'harry-potter-and-the-chamber-of-secrets',
         title: "Harry Potter and the Chamber of Secrets",
         author: 'J.K. Rowling',
-        status: 'reading',
+        status: 'reading (take a break from it)',
         thumbnail: 'books/images/harry-potter-and-the-chamber-of-secrets.jpg'
+    },
+    {
+        id: 'psychology-of-emotions',
+        title: 'Psychology of Emotions',
+        author: 'David J. Lieberman',
+        status: 'reading',
+        thumbnail: 'books/images/psychology-of-emotions.jpg'
     },
     
     // Completed Books
@@ -49,6 +56,22 @@ const books = [
         author: 'J.K. Rowling',
         status: 'completed',
         thumbnail: 'books/images/harry-potter-and-the-sorcerers-stone.jpg',
+        rating: 4
+    },
+    {
+        id: 'you-do-you',
+        title: 'You Do You',
+        author: 'Fellixandro Ruby',
+        status: 'completed',
+        thumbnail: 'books/images/you-do-you.jpg',
+        rating: 4
+    },
+    {
+        id: 'psychology-of-money',
+        title: 'Psychology of Money',
+        author: 'Morgan Housel',
+        status: 'completed',
+        thumbnail: 'books/images/psychology-of-money.jpg',
         rating: 4
     },
     
