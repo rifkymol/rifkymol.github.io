@@ -10,6 +10,7 @@
     cursor: pointer;
     margin-bottom: 1rem;
     overflow: hidden;
+    position: relative;
 }
 
 .gallery-item img {
@@ -18,9 +19,27 @@
     width: 100%;
 }
 
+.gallery-caption {
+    background: linear-gradient(180deg, transparent, rgba(0, 0, 0, 0.72));
+    bottom: 0;
+    color: #fff;
+    font-family: var(--font-display);
+    font-size: 0.88rem;
+    left: 0;
+    opacity: 0;
+    padding: 2.5rem 0.85rem 0.85rem;
+    position: absolute;
+    right: 0;
+    transition: opacity var(--transition-base);
+}
+
 .gallery-item:hover img {
     opacity: 0.95;
     transform: scale(1.02);
+}
+
+.gallery-item:hover .gallery-caption {
+    opacity: 1;
 }
 
 .gallery-preview {

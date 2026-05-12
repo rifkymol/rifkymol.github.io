@@ -21,8 +21,8 @@
  *   thumbnail: 'hobbies/images/photo.jpg',
  *   type: 'gallery',
  *   gallery: [
- *     { src: 'hobbies/images/photo1.jpg', caption: 'Optional caption', tags: ['Street', 'Night'] },
- *     { src: 'hobbies/images/photo2.jpg' }
+ *     { src: 'hobbies/images/photo1.jpg', caption: 'Optional caption', tags: ['Street', 'Night'], source: 'local' },
+ *     { src: 'hobbies/images/photo2.jpg', source: 'local' }
  *   ]
  * }
  * 
@@ -52,28 +52,28 @@ const hobbies = [
         thumbnail: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
         type: 'gallery',
         gallery: [
-            // Add your photos here! Example:
-            { src: 'hobbies/images/20250719_151134.jpg', caption: 'Cafe', tags: ['Cafe'] },
-            { src: 'hobbies/images/Z.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/C.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/D.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/Z.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/A.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/G.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/H.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/I.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/J.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/K.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/L.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/M.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/N.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/O.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/P.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/Q.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/R.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/S.jpg', caption: '', tags: [''] },
-            { src: 'hobbies/images/T.jpg', caption: '', tags: [''] },
-            // { src: 'hobbies/images/landscape-1.jpg', caption: 'Mountain sunrise', tags: ['Landscape'] },
+            { src: 'hobbies/images/20250719_151134.jpg', caption: 'Cafe corner in soft afternoon light', tags: ['Cafe', 'Everyday'], source: 'local' },
+            { src: 'hobbies/images/A.jpg', caption: 'Quiet city detail', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/B.jpg', caption: 'Passing moment', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/C.jpg', caption: 'Light and shadow study', tags: ['Light'], source: 'local' },
+            { src: 'hobbies/images/D.jpg', caption: 'Urban texture', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/E.jpg', caption: 'Small scene, strong mood', tags: ['Everyday'], source: 'local' },
+            { src: 'hobbies/images/F.jpg', caption: 'Framed from a walk', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/G.jpg', caption: 'Open-air composition', tags: ['Landscape'], source: 'local' },
+            { src: 'hobbies/images/H.jpg', caption: 'Still frame from the day', tags: ['Everyday'], source: 'local' },
+            { src: 'hobbies/images/I.jpg', caption: 'Lines and structure', tags: ['Architecture'], source: 'local' },
+            { src: 'hobbies/images/J.jpg', caption: 'Natural color study', tags: ['Landscape'], source: 'local' },
+            { src: 'hobbies/images/K.jpg', caption: 'A calm detail', tags: ['Everyday'], source: 'local' },
+            { src: 'hobbies/images/L.jpg', caption: 'Street-side atmosphere', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/M.jpg', caption: 'Shape and contrast', tags: ['Light'], source: 'local' },
+            { src: 'hobbies/images/N.jpg', caption: 'Landscape pause', tags: ['Landscape'], source: 'local' },
+            { src: 'hobbies/images/O.jpg', caption: 'Found composition', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/P.jpg', caption: 'Daily-life frame', tags: ['Everyday'], source: 'local' },
+            { src: 'hobbies/images/Q.jpg', caption: 'Clean lines', tags: ['Architecture'], source: 'local' },
+            { src: 'hobbies/images/R.jpg', caption: 'Evening tone', tags: ['Light'], source: 'local' },
+            { src: 'hobbies/images/S.jpg', caption: 'Wide scene', tags: ['Landscape'], source: 'local' },
+            { src: 'hobbies/images/T.jpg', caption: 'Street memory', tags: ['Street'], source: 'local' },
+            { src: 'hobbies/images/Z.jpg', caption: 'Favorite frame from the archive', tags: ['Archive'], source: 'local' },
         ]
     },
     {

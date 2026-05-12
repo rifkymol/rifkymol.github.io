@@ -8,6 +8,7 @@
  *   id: 'unique-id',
  *   title: 'Project Name',
  *   description: 'Short description',
+ *   role: 'Your role or contribution',
  *   thumbnail: 'projects/images/my-project.jpg' OR 'linear-gradient(...)',
  *   tags: ['Tag1', 'Tag2'],
  *   link: 'https://...',           // Optional: project URL
@@ -21,22 +22,25 @@ const projects = [
     {
         id: 'woowa',
         title: 'Woo-wa',
-        description: 'Woo-wa is a Wordpress plugin for Woocommerce Order Notifications & Automatic Reminder via WhatsApp. Helping small-medium businesses to boost sales and improve customer engagement through automated WhatsApp notifications. I helped in developing website using WordPress and Elementor, I also developed the plugin.',
+        description: 'WooCommerce WhatsApp notification plugin that helps small and medium businesses send order updates and automated reminders.',
+        role: 'Built the WordPress/Elementor website and contributed to plugin development.',
         thumbnail: 'projects/images/woo-wa.png',
-        tags: ['Business Intelligence'],
+        tags: ['WordPress', 'WooCommerce', 'Plugin'],
         link: 'https://www.woo-wa.com',
     },
     {
         id: 'workflow',
         title: 'Workflow',
-        description: 'Built a real-time warehouse approval system as part of an internal logistics management tool to streamline operations and improve efficiency. working as a back-end developer using Express.js, and MySQL.',
+        description: 'Real-time warehouse approval system for an internal logistics management workflow.',
+        role: 'Worked on backend services with Express.js and MySQL.',
         thumbnail: 'projects/images/workflow.png',
         tags: ['Next.js', 'Express.js', 'MySQL'],
     },
     {
         id: 'evo-gym',
         title: 'Evo Gym',
-        description: 'A frontend web template for Gym Company. Built with Typescript, React.js and Tailwind CSS.',
+        description: 'Responsive frontend template for a gym business website with a polished marketing layout.',
+        role: 'Built the interface with React, TypeScript, and Tailwind CSS.',
         thumbnail: 'projects/images/evo-gym.png',
         tags: ['React.js', 'TypeScript', 'Tailwind CSS'],
         github: 'https://github.com/rifkymol/gym-typescript-react-tailwindcss',
@@ -45,23 +49,24 @@ const projects = [
     {
         id: 'resepkan',
         title: 'Resepkan',
-        description: 'A web app that saves and organizes your favorite recipes. Built with Laravel and Vue.js.',
+        description: 'Recipe organizer web app for saving, browsing, and managing favorite cooking ideas.',
+        role: 'Built with Laravel and Vue.js.',
         thumbnail: 'projects/images/resepkan.png',
         tags: ['Laravel', 'Vue.js'],
-        github: ''
     },
     {
         id: 'f1-leaderboard',
         title: 'F1 Leaderboard',
-        description: 'A web app that displays the current Formula 1 season standings using the FastF1. Built with Python and streamlit.',
+        description: 'Formula 1 standings dashboard powered by motorsport data and presented in Streamlit.',
+        role: 'Built data display flow with Python and Streamlit.',
         thumbnail: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
         tags: ['API', 'Python', 'Streamlit'],
-        github: ''
     },
     {
         id: 'portfolio-website',
         title: 'Portfolio Website',
-        description: 'This website! Clean design with smooth animations and dynamic content loading.',
+        description: 'This static personal website, organized around projects, writing, reading, and photography.',
+        role: 'Built with config-driven content, modular CSS, and vanilla JavaScript.',
         thumbnail: 'linear-gradient(135deg, #11998e 0%, #38ef7d 100%)',
         tags: ['HTML', 'CSS', 'JS'],
         github: 'https://github.com/rifkymol/personal-website'
@@ -69,7 +74,8 @@ const projects = [
     {
         id: 'motionboard',
         title: 'MotionBoard',
-        description: 'MotionBoard is a BI tool that provides a single platform with all the functions you need to utilize data. Helped in developing front-end features and improving user experience for one of motorcycle company in Indonesia',
+        description: 'Business intelligence platform work for a motorcycle company in Indonesia.',
+        role: 'Helped develop front-end features and improve user experience.',
         thumbnail: 'projects/images/motionboard.png',
         tags: ['Business Intelligence'],
         link: 'https://www.wingarc.com/en/product/motionboard/',

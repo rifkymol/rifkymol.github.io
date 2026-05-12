@@ -7,31 +7,48 @@ function loadAllBooks() {
         return;
     }
 
-    container.innerHTML = books.map(book => {
-        const statusMeta = getBookStatusMeta(book.status);
-        const thumbnailStyle = getThumbnailStyle(book.thumbnail);
-        const rating = renderStars(book.rating);
-
-        return `
-            <article class="book-card" data-status="${escapeAttribute(book.status)}">
-                <div class="book-thumbnail" style="${thumbnailStyle}" role="img" aria-label="${escapeAttribute(book.title)} book cover"></div>
-                <div class="book-card-content">
-                    <span class="book-status-tag ${escapeAttribute(book.status)}">${statusMeta.icon} ${statusMeta.label}</span>
-                    <h3>${escapeHTML(book.title)}</h3>
-                    <p class="book-author">by ${escapeHTML(book.author)}</p>
-                    ${book.note ? `<p class="book-note">${escapeHTML(book.note)}</p>` : ''}
-                    ${rating ? `<p class="book-rating" aria-label="Rating ${escapeAttribute(book.rating)} out of 5">${rating}</p>` : ''}
-                </div>
-            </article>
-        `;
-    }).join('');
+    container.innerHTML = books.map(book => renderBookCard(book)).join('');
 
     attachBookFilterListeners();
 }
 
+function renderBookCard(book) {
+    const statusMeta = getBookStatusMeta(book.status);
+    const thumbnailStyle = getThumbnailStyle(book.thumbnail);
+    const rating = renderStars(book.rating);
+
+    return `
+        <article class="book-card" data-status="${escapeAttribute(book.status)}">
+            <div class="book-thumbnail" style="${thumbnailStyle}" role="img" aria-label="${escapeAttribute(book.title)} book cover"></div>
+            <div class="book-card-content">
+                <span class="book-status-tag ${escapeAttribute(book.status)}">${statusMeta.icon} ${statusMeta.label}</span>
+                <h3>${escapeHTML(book.title)}</h3>
+                <p class="book-author">by ${escapeHTML(book.author)}</p>
+                ${book.note ? `<p class="book-note">${escapeHTML(book.note)}</p>` : ''}
+                ${rating ? `<p class="book-rating" aria-label="Rating ${escapeAttribute(book.rating)} out of 5">${rating}</p>` : ''}
+            </div>
+        </article>
+    `;
+}
+
+function loadRecentBooks() {
+    const container = document.getElementById('recent-books');
+    if (!container) return;
+
+    if (typeof books === 'undefined' || books.length === 0) {
+        container.innerHTML = '<p>No books yet.</p>';
+        return;
+    }
+
+    container.innerHTML = books
+        .slice(0, 3)
+        .map(book => renderBookCard(book))
+        .join('');
+}
+
 function attachBookFilterListeners() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    const bookCards = document.querySelectorAll('.book-card');
+    const bookCards = document.querySelectorAll('#books-grid .book-card');
 
     filterButtons.forEach(button => {
         button.addEventListener('click', () => {

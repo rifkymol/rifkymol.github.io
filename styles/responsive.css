@@ -22,7 +22,7 @@
     }
 
     .hero {
-        padding: 7rem 0 9rem;
+        padding: 5rem 0 6rem;
     }
 
     .name {
@@ -31,6 +31,16 @@
 
     .tagline {
         font-size: 1.08rem;
+    }
+
+    .hero-actions,
+    .hero-highlights,
+    .about-highlights {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-highlights {
+        text-align: center;
     }
 
     h2 {
@@ -87,7 +97,16 @@
     }
 
     .hero {
-        padding-bottom: 7rem;
+        padding-bottom: 5rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+    }
+
+    .primary-action,
+    .secondary-action {
+        width: 100%;
     }
 
     .projects-grid,

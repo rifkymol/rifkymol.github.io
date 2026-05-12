@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifky Maulana - Web Developer</title>
-    <meta name="description" content="Personal website of Rifky Maulana, a software engineer sharing projects, writing, reading notes, and photography.">
+    <title>Rifky Maulana - Books, Blog, Photography</title>
+    <meta name="description" content="Personal website of Rifky Maulana, sharing reading notes, writing, photography, and selected projects.">
     <meta name="theme-color" content="#F9F6EE">
-    <meta property="og:title" content="Rifky Maulana - Web Developer">
-    <meta property="og:description" content="Projects, writing, reading notes, and photography from Rifky Maulana.">
+    <meta property="og:title" content="Rifky Maulana - Books, Blog, Photography">
+    <meta property="og:description" content="Reading notes, writing, photography, and selected projects from Rifky Maulana.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="projects/images/woo-wa.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -26,10 +26,10 @@
     <nav class="nav-container">
         <div class="nav-tabs">
             <button class="tab-btn active" data-tab="home">Home</button>
-            <button class="tab-btn" data-tab="projects">Projects</button>
             <button class="tab-btn" data-tab="blog">Blog</button>
             <button class="tab-btn" data-tab="reading">Reading</button>
             <button class="tab-btn" data-tab="photography">Photography</button>
+            <button class="tab-btn" data-tab="projects">Projects</button>
             <button class="tab-btn" data-tab="about">About</button>
         </div>
     </nav>
@@ -39,9 +39,27 @@
         <!-- Home Section -->
         <section id="home" class="tab-content active">
             <div class="hero">
+                <p class="hero-eyebrow">Books, writing, photos, and a few things I build</p>
                 <h1 class="name">Rifky Maulana</h1>
-                <p class="tagline">Software engineer, Tifosi, Manchester United supporter, and accidental <span class="emphasis-creative">(Creative)</span> Problem Solver.<br>
-                I'm trying to read more, write consistently, cook better, and still find time for Dota <span class="emphasis-fun">(if I have any)</span>.</p>
+                <p class="tagline">A personal corner for what I read, what I notice, what I write, and the photos I collect along the way. Work still shows up here, but it is not the whole story.</p>
+                <div class="hero-actions" aria-label="Primary actions">
+                    <button class="primary-action view-all" data-tab="blog">Read the Blog</button>
+                    <button class="secondary-action view-all" data-tab="photography">View Photos</button>
+                </div>
+                <div class="hero-highlights" aria-label="Personal website themes">
+                    <div>
+                        <strong>Reading</strong>
+                        <span>Books I have finished, books in progress, and notes worth keeping.</span>
+                    </div>
+                    <div>
+                        <strong>Writing</strong>
+                        <span>Blog posts about learning, building, habits, and small life observations.</span>
+                    </div>
+                    <div>
+                        <strong>Photography</strong>
+                        <span>Street, landscape, and everyday frames from wherever I happen to be.</span>
+                    </div>
+                </div>
             </div>
             
             <section class="recent-section">
@@ -59,15 +77,15 @@
             <div class="recent-content">
                 <section class="recent-section">
                     <div class="section-header">
-                        <h2>Recent Projects</h2>
-                        <button class="view-all" data-tab="projects">View All →</button>
+                        <h2>Reading List</h2>
+                        <button class="view-all" data-tab="reading">View All →</button>
                     </div>
-                    <div id="recent-projects" class="projects-grid">
-                        <!-- Loaded dynamically from projects-config.js -->
-                        <p class="loading">Loading projects...</p>
+                    <div id="recent-books" class="books-grid">
+                        <!-- Loaded dynamically from books-config.js -->
+                        <p class="loading">Loading books...</p>
                     </div>
                 </section>
-                
+
                 <section class="recent-section">
                     <div class="section-header">
                         <h2>Latest Blog Posts</h2>
@@ -79,6 +97,17 @@
                     </div>
                 </section>
                 
+                <section class="recent-section">
+                    <div class="section-header">
+                        <h2>Selected Projects</h2>
+                        <button class="view-all" data-tab="projects">View All →</button>
+                    </div>
+                    <div id="recent-projects" class="projects-grid">
+                        <!-- Loaded dynamically from projects-config.js -->
+                        <p class="loading">Loading projects...</p>
+                    </div>
+                </section>
+                
             </div>
         </section>
 
@@ -86,9 +115,21 @@
         <section id="about" class="tab-content">
             <h2>About Me</h2>
             <p class="about-text">
-                Hi, I'm Rifky. I build web products across front-end, back-end, and WordPress work, with a focus on practical systems that help people get things done.
-                This site collects the projects I have worked on, the posts I am trying to write consistently, the books I am reading, and the photos I take along the way.
+                Hi, I'm Rifky. This website is where I keep the parts of myself that do not fit neatly into a resume: books I am reading, posts I am trying to write, photos I like, and projects I have built.
             </p>
+            <p class="about-text">
+                I work as a web developer, but the broader thread here is curiosity. I am trying to read more carefully, write more consistently, notice better light, cook better food, and still find time for games when life allows it.
+            </p>
+            <div class="about-highlights" aria-label="Personal focus">
+                <div>
+                    <strong>This site is for</strong>
+                    <span>Reading notes, essays, photo collections, and small records of what I am learning.</span>
+                </div>
+                <div>
+                    <strong>Also here</strong>
+                    <span>Selected web projects, because building things is still part of how I understand the world.</span>
+                </div>
+            </div>
             <div class="social-links">
                 <div class="icon-text-container">
                     <a href="https://github.com/rifkymol" target="_blank" rel="noopener noreferrer" aria-label="Visit Rifky Maulana on GitHub">

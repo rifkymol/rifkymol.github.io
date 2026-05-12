@@ -1,10 +1,12 @@
 function renderProjectCard(project, options = {}) {
     const thumbnailStyle = getThumbnailStyle(project.thumbnail);
     const tags = Array.isArray(project.tags) ? project.tags : [];
+    const hasLinks = Boolean(project.link || project.github);
     const links = options.includeLinks ? `
-        <div class="project-links">
+        <div class="project-links${hasLinks ? '' : ' project-links-empty'}">
             ${project.link ? `<a href="${escapeAttribute(project.link)}" class="project-link" target="_blank" rel="noopener noreferrer">View Project →</a>` : ''}
             ${project.github ? `<a href="${escapeAttribute(project.github)}" class="project-link github-link" target="_blank" rel="noopener noreferrer">GitHub →</a>` : ''}
+            ${hasLinks ? '' : '<span class="project-link-muted">Private/internal project</span>'}
         </div>
     ` : '';
 
@@ -14,6 +16,7 @@ function renderProjectCard(project, options = {}) {
             <div class="project-card-content">
                 <h3>${escapeHTML(project.title)}</h3>
                 <p>${escapeHTML(project.description)}</p>
+                ${project.role ? `<p class="project-role">${escapeHTML(project.role)}</p>` : ''}
                 <div class="tech-stack">
                     ${tags.map(tag => `<span class="tech-tag">${escapeHTML(tag)}</span>`).join('')}
                 </div>

@@ -3,22 +3,44 @@ function getPhotographyGallery() {
     return hobbies.find(hobby => hobby.id === 'photography');
 }
 
+function getNormalizedPhotos() {
+    const photography = getPhotographyGallery();
+    if (!photography || !Array.isArray(photography.gallery)) return [];
+
+    const seenSources = new Set();
+    return photography.gallery
+        .filter(photo => photo && photo.src)
+        .filter(photo => {
+            if (seenSources.has(photo.src)) return false;
+            seenSources.add(photo.src);
+            return true;
+        })
+        .map((photo, index) => ({
+            ...photo,
+            caption: String(photo.caption || '').trim(),
+            source: photo.source || 'local',
+            tags: Array.isArray(photo.tags) ? photo.tags.map(tag => String(tag).trim()).filter(Boolean) : [],
+            alt: photo.alt || photo.caption || `Photography ${index + 1}`
+        }));
+}
+
 function loadPhotographyGallery() {
     const container = document.getElementById('photography-grid');
     if (!container) return;
 
-    const photography = getPhotographyGallery();
-    if (!photography || !photography.gallery || photography.gallery.length === 0) {
+    const photos = getNormalizedPhotos();
+    if (photos.length === 0) {
         container.innerHTML = '<p class="no-photos">No photos yet.</p>';
         return;
     }
 
-    SiteState.currentGallery = photography.gallery;
+    SiteState.currentGallery = photos;
     SiteState.currentGalleryIndex = 0;
 
-    container.innerHTML = photography.gallery.map((photo, index) => `
+    container.innerHTML = photos.map((photo, index) => `
         <div class="gallery-item" data-index="${index}">
-            <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.caption || `Photography ${index + 1}`)}" loading="lazy">
+            <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.alt)}" loading="lazy">
+            ${photo.caption ? `<span class="gallery-caption">${escapeHTML(photo.caption)}</span>` : ''}
         </div>
     `).join('');
 
@@ -33,21 +55,21 @@ function loadRecentPhotos() {
     const container = document.getElementById('recent-photos');
     if (!container) return;
 
-    const photography = getPhotographyGallery();
-    if (!photography || !photography.gallery || photography.gallery.length === 0) {
+    const photos = getNormalizedPhotos();
+    if (photos.length === 0) {
         container.innerHTML = '<p>No photos yet.</p>';
         return;
     }
 
-    container.innerHTML = photography.gallery.slice(0, 6).map((photo, index) => `
+    container.innerHTML = photos.slice(0, 6).map((photo, index) => `
         <div class="gallery-preview-item" data-index="${index}">
-            <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.caption || `Photography ${index + 1}`)}" loading="lazy">
+            <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.alt)}" loading="lazy">
         </div>
     `).join('');
 
     container.querySelectorAll('.gallery-preview-item').forEach(item => {
         item.addEventListener('click', () => {
-            SiteState.currentGallery = photography.gallery;
+            SiteState.currentGallery = photos;
             openLightbox(parseInt(item.getAttribute('data-index'), 10));
         });
     });
@@ -91,7 +113,7 @@ function openLightbox(index) {
     const photo = SiteState.currentGallery[index];
 
     image.src = photo.src;
-    image.alt = photo.caption || `Photography ${index + 1}`;
+    image.alt = photo.alt || photo.caption || `Photography ${index + 1}`;
     caption.textContent = photo.caption || '';
     caption.style.display = photo.caption ? 'block' : 'none';
 

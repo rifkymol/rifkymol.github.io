@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadRecentProjects();
     loadRecentBlogs();
     loadRecentPhotos();
+    loadRecentBooks();
     loadAllProjects();
     loadAllBooks();
     loadPhotographyGallery();
