@@ -30,8 +30,9 @@ const books = [
         id: 'harry-potter-and-the-chamber-of-secrets',
         title: "Harry Potter and the Chamber of Secrets",
         author: 'J.K. Rowling',
-        status: 'reading (take a break from it)',
-        thumbnail: 'books/images/harry-potter-and-the-chamber-of-secrets.jpg'
+        status: 'reading',
+        thumbnail: 'books/images/harry-potter-and-the-chamber-of-secrets.jpg',
+        note: 'Taking a short break from this one.'
     },
     {
         id: 'psychology-of-emotions',
@@ -63,7 +64,7 @@ const books = [
         title: 'You Do You',
         author: 'Fellixandro Ruby',
         status: 'completed',
-        thumbnail: 'books/images/you-do-you.jpg',
+        thumbnail: 'books/images/you-do-you.jpeg',
         rating: 4
     },
     {

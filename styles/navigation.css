@@ -1,0 +1,50 @@
+.nav-container {
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--color-bg) 92%, transparent);
+    border-bottom: 1px solid var(--color-border);
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-tabs {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 800px;
+    padding: 1.5rem 2rem;
+}
+
+.tab-btn {
+    background: none;
+    border: 0;
+    color: var(--color-muted);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color var(--transition-base);
+}
+
+.tab-btn:hover,
+.tab-btn.active {
+    color: var(--color-heading);
+}
+
+.tab-btn.active {
+    font-weight: 600;
+}
+
+.tab-btn.active::after {
+    background: var(--color-heading);
+    bottom: 0;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    right: 0;
+}

@@ -1,0 +1,92 @@
+.hero {
+    padding: 10rem 0 14rem;
+    text-align: center;
+}
+
+.name {
+    animation: slideUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.1s forwards;
+    color: var(--color-heading);
+    font-family: var(--font-display);
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    opacity: 0;
+}
+
+.tagline {
+    animation: slideUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    color: #555;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.8;
+    margin: 0 auto 2rem;
+    max-width: 900px;
+    opacity: 0;
+}
+
+.tagline .emphasis-creative {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a5a);
+    background-clip: text;
+    color: #ff6b6b;
+    font-size: 1.4rem;
+    font-style: italic;
+    font-weight: 700;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.tagline .emphasis-fun {
+    color: #4ecdc4;
+    font-style: italic;
+    font-weight: 600;
+}
+
+.about-text {
+    animation: slideUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.2s forwards;
+    color: #555;
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    max-width: 820px;
+    opacity: 0;
+}
+
+.social-links {
+    animation: slideUp 0.55s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    opacity: 0;
+}
+
+.icon-text-container {
+    align-items: center;
+    border: 1px solid #d8d3c8;
+    border-radius: var(--radius-md);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 108px;
+    padding: 1rem;
+    text-align: center;
+}
+
+.social-links a {
+    color: var(--color-text);
+    font-family: var(--font-display);
+    font-size: 0.95rem;
+    text-decoration: none;
+    transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.social-links a:hover {
+    color: var(--color-muted);
+    transform: translateY(-2px);
+}
+
+.icon {
+    color: var(--color-focus);
+    display: block;
+}
