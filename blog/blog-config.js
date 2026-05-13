@@ -26,11 +26,11 @@ const blogPosts = [
         file: "blog/first-post.md"
     },
     {
-        id: "learning-python",
-        title: "Learning Python in 2026",
-        date: "2026-01-05",
-        excerpt: "Thoughts on learning Python and building cool projects with AI and web development...",
+        id: "introduction-to-ai",
+        title: "Introduction to Artificial Intelligence",
+        date: "2026-05-13",
+        excerpt: "A beginner's guide to understanding the fundamentals of AI and its applications...",
         thumbnail: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-        file: "blog/learning-python.md"
+        file: "blog/introduction-to-ai.md"
     }
 ];
