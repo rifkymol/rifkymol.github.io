@@ -1,25 +1,24 @@
-# Integrasi Blog Tab Dengan Medium RSS
+# Blog Hybrid Medium + Blog Lokal
 
 ## Checklist
-- [x] Review current blog renderer/config and preserve existing working-tree changes.
-- [x] Add cached Medium RSS-to-JSON fetch helper.
-- [x] Render Blog tab from Medium RSS cards that open Medium in a new tab.
-- [x] Render Home latest posts from the same cached Medium feed.
-- [x] Add loading, empty, and error fallback states with Medium profile link.
-- [x] Make stale `/blog/{slug}` routes fall back to the Medium-backed blog list for v1.
-- [x] Run syntax, feed parsing, and local smoke verification.
+- [x] Review current Medium-only renderer and local blog config.
+- [x] Restore local blog config loading.
+- [x] Normalize local and Medium posts into one combined list.
+- [x] Render source badges and mixed local/external card behavior.
+- [x] Restore local Markdown detail and share behavior.
+- [x] Keep Medium failure non-blocking when local posts exist.
+- [x] Run syntax, parser, local detail, Medium, and browser smoke checks.
 
 ## Verification
-- Medium RSS proxy check returned `status=ok` with 1 item from `https://medium.com/feed/@rifkymol`.
 - `node --check` passed for all JavaScript files.
 - `git diff --check` passed with no whitespace errors.
-- Medium parser check passed for excerpt stripping, image extraction, and encoded RSS proxy URL.
-- Headless Edge check passed: `/` and `/blog` render Medium cards, external links point to Medium, and links use `target="_blank"` plus `rel="noopener noreferrer"`.
-- Stale local article route check passed: `/blog/old-local-slug` falls back to `/blog` list view for v1.
+- Hybrid parser check passed: 3 local posts from `blog/blog-config.js` plus 1 mocked Medium post sorted into one list.
+- Medium failure fallback check passed: local posts still render and the Medium notice appears when the feed fetch fails.
+- Headless Edge check passed on `http://127.0.0.1:8788`: Home latest shows 3 mixed posts, Blog shows 4 mixed posts, Medium link opens externally with `noopener noreferrer`, local card opens internal Markdown detail, and direct `/blog/first-blog-post` route renders local detail.
 
 ## Review
-- Blog tab and Home latest blog posts now use the Medium RSS feed for `@rifkymol` through `rss2json`.
-- The feed request is cached in memory so Home and Blog share one fetch.
-- Blog cards now open the original Medium article in a new tab instead of loading local Markdown detail pages.
-- Error and empty states show a Medium profile fallback link.
-- The local `blog/blog-config.js` script is no longer loaded by `index.html`; the existing file is preserved for now but is not the Blog source.
+- Blog now combines local Markdown posts and Medium RSS posts into one date-sorted list.
+- Local posts keep the original internal detail page and share behavior.
+- Medium posts open on Medium in a new tab and are labeled separately from local posts.
+- Source badges distinguish `Personal Blog` and `Medium`.
+- Medium feed failure is non-blocking when local posts exist.
