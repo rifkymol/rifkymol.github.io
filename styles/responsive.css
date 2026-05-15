@@ -120,4 +120,17 @@
         align-items: center;
         flex-direction: row;
     }
+
+    .post-header {
+        display: block;
+    }
+
+    .post-header-actions {
+        margin-top: 1rem;
+        padding-top: 0;
+    }
+
+    .share-feedback {
+        min-width: 0;
+    }
 }

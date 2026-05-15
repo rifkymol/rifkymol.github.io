@@ -1,28 +1,26 @@
-# Build The House First
+# Clean Blog URL Tanpa Hash + Share Artikel
 
 ## Checklist
-- [x] Review existing site structure and lessons file availability.
-- [x] Improve homepage hierarchy for portfolio-first positioning.
-- [x] Polish project cards and project content.
-- [x] Normalize local photography data for future API sources.
-- [x] Improve photography rendering and empty metadata handling.
-- [x] Refresh About section as a useful portfolio contact area.
-- [x] Correct brand direction from work-first portfolio to books/blog/photography personal website.
-- [x] Run available command-level verification.
-- [ ] Perform visual browser verification for navigation, lightbox, responsiveness, and console health when a browser tool is available.
+- [x] Review current static site structure and previous lessons.
+- [x] Add blog slugs and route helpers for clean blog URLs.
+- [x] Update blog list/detail rendering to use `/blog` and `/blog/{slug}`.
+- [x] Add article share button with Web Share API and clipboard fallback.
+- [x] Add lightweight share/header styles.
+- [x] Add Azure Static Web Apps fallback config.
+- [x] Verify home, blog list, blog detail, direct route fallback, missing slug, back link, and share fallback behavior.
 
 ## Verification
-- `node --check` passed for changed JavaScript/config files.
-- `node --check` passed after adding the homepage reading preview.
-- Asset reference check passed: all configured project thumbnails, photo sources, and blog Markdown files exist.
-- Local HTTP smoke test passed: `index.html` and `blog/first-post.md` returned `200`.
-- Local server check passed on `http://127.0.0.1:8787/index.html`.
-- Browser automation was not available in this session because the repo has no Playwright package and the in-app browser control tool was not exposed.
+- `node --check` passed for all JavaScript files.
+- `staticwebapp.config.json` parsed successfully as JSON.
+- Blog config validation passed: every post has a unique slug and existing Markdown file.
+- Search check found no remaining `#blog`, `data-post`, or `updateHash` usage.
+- Local rewrite server returned `200` for `/`, `/blog`, `/blog/introduction-to-artificial-intelligence`, and `/blog/slug-yang-tidak-ada`.
+- Local rewrite server confirmed nested blog routes receive `index.html` with `<base href="/">`.
+- Share handler unit check passed for both `navigator.share` and clipboard fallback, including `Link copied` feedback.
+- Visual browser automation was not available from the exposed tools/PATH in this session, so final click-through visual verification was covered by route and handler checks instead.
 
 ## Review
-- Homepage now opens with personal-brand positioning around reading, writing, and photography.
-- Navigation and homepage section order now prioritize Blog, Reading, and Photography before Projects.
-- Projects now use shorter portfolio copy plus optional role/contribution metadata.
-- Photography config now uses local source metadata, meaningful captions/tags, no duplicate `Z.jpg`, and includes all existing local photo files.
-- Gallery rendering now normalizes photo data and filters empty metadata before rendering.
-- `books/books-config.js` was not edited during this implementation; it already had an existing working-tree change.
+- Blog routing now uses clean paths for `/blog` and `/blog/{slug}` while keeping non-blog tabs on the existing hash behavior.
+- Blog cards use `slug` as the URL identifier, and article detail loading now receives the full post object.
+- Article detail headers now include a `Share` button with native Web Share support and clipboard fallback.
+- Azure Static Web Apps now has a navigation fallback so direct blog routes refresh to `index.html`.

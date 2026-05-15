@@ -12,11 +12,17 @@ function switchTab(targetTab, options = {}) {
     targetButton.classList.add('active');
     targetContent.classList.add('active');
 
-    if (options.updateHash !== false) {
-        history.pushState(null, '', `#${targetTab}`);
+    if (options.updateUrl !== false) {
+        if (targetTab === 'home') {
+            history.pushState(null, '', '/');
+        } else if (targetTab === 'blog') {
+            history.pushState(null, '', '/blog');
+        } else {
+            history.pushState(null, '', `/#${targetTab}`);
+        }
     }
 
-    if (targetTab === 'blog') {
+    if (targetTab === 'blog' && options.showBlogList !== false) {
         showBlogList();
     }
 }
@@ -35,13 +41,39 @@ function initNavigation() {
         });
     });
 
+    function handleRouteChange() {
+        const path = window.location.pathname.replace(/\/+$/, '') || '/';
+
+        if (path === '/') {
+            const hash = window.location.hash.substring(1);
+            switchTab(hash || 'home', { updateUrl: false });
+            return;
+        }
+
+        if (path === '/blog') {
+            switchTab('blog', { updateUrl: false });
+            showBlogList();
+            return;
+        }
+
+        if (path.startsWith('/blog/')) {
+            const slug = decodeURIComponent(path.replace('/blog/', ''));
+            switchTab('blog', { updateUrl: false, showBlogList: false });
+            showBlogPostBySlug(slug, { updateUrl: false });
+            return;
+        }
+
+        switchTab('home', { updateUrl: false });
+    }
+
     function handleHashChange() {
         const hash = window.location.hash.substring(1);
-        if (hash) {
-            switchTab(hash, { updateHash: false });
+        if (window.location.pathname === '/' && hash) {
+            switchTab(hash, { updateUrl: false });
         }
     }
 
-    handleHashChange();
+    handleRouteChange();
     window.addEventListener('hashchange', handleHashChange);
+    window.addEventListener('popstate', handleRouteChange);
 }

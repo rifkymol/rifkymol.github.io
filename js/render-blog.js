@@ -17,12 +17,18 @@ function loadBlogPosts() {
     attachBlogCardListeners(container);
 }
 
+function getBlogPostBySlug(slug) {
+    const posts = getSortedBlogPosts();
+    return posts.find(post => post.slug === slug);
+}
+
 function renderBlogCard(post, options = {}) {
     const formattedDate = formatDate(post.date);
     const thumbnailStyle = getThumbnailStyle(post.thumbnail);
+    const slug = post.slug || post.id;
 
     return `
-        <article class="blog-card${options.preview ? ' blog-card-preview' : ''}" data-post="${escapeAttribute(post.file)}" tabindex="0" role="button" aria-label="Read ${escapeAttribute(post.title)}">
+        <article class="blog-card${options.preview ? ' blog-card-preview' : ''}" data-slug="${escapeAttribute(slug)}" tabindex="0" role="button" aria-label="Read ${escapeAttribute(post.title)}">
             <div class="blog-thumbnail" style="${thumbnailStyle}" role="img" aria-label="${escapeAttribute(post.title)} thumbnail"></div>
             <div class="blog-card-content">
                 <p class="post-date">${escapeHTML(formattedDate)}</p>
@@ -37,10 +43,7 @@ function renderBlogCard(post, options = {}) {
 function attachBlogCardListeners(scope) {
     scope.querySelectorAll('.blog-card').forEach(card => {
         const openPost = () => {
-            const postFile = card.getAttribute('data-post');
-            const postTitle = card.querySelector('h3').textContent;
-            const postDate = card.querySelector('.post-date').textContent;
-            loadBlogPost(postFile, postTitle, postDate);
+            showBlogPostBySlug(card.getAttribute('data-slug'), { updateUrl: true });
         };
 
         card.addEventListener('click', openPost);
@@ -53,32 +56,57 @@ function attachBlogCardListeners(scope) {
     });
 }
 
-async function loadBlogPost(file, title, date) {
+function showBlogPostBySlug(slug, options = {}) {
+    const post = getBlogPostBySlug(slug);
+
+    if (options.updateUrl !== false) {
+        history.pushState(null, '', `/blog/${encodeURIComponent(slug)}`);
+    }
+
+    if (!post) {
+        showBlogNotFound(slug);
+        return;
+    }
+
+    loadBlogPost(post);
+}
+
+async function loadBlogPost(post) {
     const listView = document.getElementById('blog-list-view');
     const postView = document.getElementById('blog-post-view');
     const contentDiv = document.getElementById('blog-content');
+
+    if (!listView || !postView || !contentDiv) return;
 
     contentDiv.innerHTML = '<p class="loading">Loading post...</p>';
     listView.style.display = 'none';
     postView.style.display = 'block';
 
     try {
-        const response = await fetch(file);
+        const response = await fetch(post.file);
         if (!response.ok) throw new Error('Failed to load post');
 
         const markdown = await response.text();
         const htmlContent = sanitizeMarkdown(markdown);
+        const formattedDate = formatDate(post.date);
 
         contentDiv.innerHTML = `
             <div class="post-header">
-                <h1>${escapeHTML(title)}</h1>
-                <div class="post-date">${escapeHTML(date)}</div>
+                <div class="post-header-main">
+                    <h1>${escapeHTML(post.title)}</h1>
+                    <div class="post-date">${escapeHTML(formattedDate)}</div>
+                </div>
+                <div class="post-header-actions">
+                    <button id="share-post" class="share-btn" type="button">Share</button>
+                    <span id="share-feedback" class="share-feedback" aria-live="polite"></span>
+                </div>
             </div>
             <div class="post-content">
                 ${htmlContent}
             </div>
         `;
 
+        attachSharePostListener(post);
         window.scrollTo(0, 0);
     } catch (error) {
         contentDiv.innerHTML = `
@@ -88,12 +116,68 @@ async function loadBlogPost(file, title, date) {
     }
 }
 
-function showBlogList() {
+function showBlogNotFound(slug) {
+    const listView = document.getElementById('blog-list-view');
+    const postView = document.getElementById('blog-post-view');
+    const contentDiv = document.getElementById('blog-content');
+
+    if (!listView || !postView || !contentDiv) return;
+
+    listView.style.display = 'none';
+    postView.style.display = 'block';
+    contentDiv.innerHTML = `
+        <div class="post-header">
+            <div class="post-header-main">
+                <h1>Post not found</h1>
+                <div class="post-date">No article matches "${escapeHTML(slug)}".</div>
+            </div>
+        </div>
+        <p class="error">The blog post you opened does not exist or has moved.</p>
+    `;
+}
+
+function showBlogList(options = {}) {
     const listView = document.getElementById('blog-list-view');
     const postView = document.getElementById('blog-post-view');
 
     if (listView) listView.style.display = 'block';
     if (postView) postView.style.display = 'none';
+
+    if (options.updateUrl !== false && window.location.pathname !== '/blog') {
+        history.pushState(null, '', '/blog');
+    }
+}
+
+async function attachSharePostListener(post) {
+    const shareButton = document.getElementById('share-post');
+    const feedback = document.getElementById('share-feedback');
+    if (!shareButton || !feedback) return;
+
+    const url = `${window.location.origin}/blog/${post.slug}`;
+
+    shareButton.addEventListener('click', async () => {
+        feedback.textContent = '';
+
+        if (navigator.share) {
+            try {
+                await navigator.share({
+                    title: post.title,
+                    text: post.excerpt,
+                    url
+                });
+                return;
+            } catch (error) {
+                if (error.name === 'AbortError') return;
+            }
+        }
+
+        try {
+            await navigator.clipboard.writeText(url);
+            feedback.textContent = 'Link copied';
+        } catch (error) {
+            feedback.textContent = 'Copy failed';
+        }
+    });
 }
 
 function loadRecentBlogs() {
@@ -114,11 +198,7 @@ function loadRecentBlogs() {
     container.querySelectorAll('.blog-card-preview').forEach(card => {
         const openPreview = () => {
             switchTab('blog');
-            loadBlogPost(
-                card.getAttribute('data-post'),
-                card.querySelector('h3').textContent,
-                card.querySelector('.post-date').textContent
-            );
+            showBlogPostBySlug(card.getAttribute('data-slug'), { updateUrl: true });
         };
 
         card.addEventListener('click', openPreview);

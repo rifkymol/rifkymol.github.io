@@ -19,6 +19,7 @@
 const blogPosts = [
     {
         id: "first-blog-post",
+        slug: "first-blog-post",
         title: "My First Blog Post",
         date: "2026-01-07",
         excerpt: "A quick introduction to what I'll be writing about and my journey in tech...",
@@ -27,10 +28,20 @@ const blogPosts = [
     },
     {
         id: "introduction-to-ai",
+        slug: "introduction-to-artificial-intelligence",
         title: "Introduction to Artificial Intelligence",
         date: "2026-05-13",
         excerpt: "A beginner's guide to understanding the fundamentals of AI and its applications...",
         thumbnail: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
         file: "blog/introduction-to-ai.md"
+    },
+    {
+        id: "llm",
+        slug: "Large-Language-Models",
+        title: "Large Language Models",
+        date: "2026-05-15",
+        excerpt: "A beginner's guide to understanding the fundamentals of LLMs and their applications...",
+        thumbnail: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+        file: "blog/llm.md"
     }
 ];
