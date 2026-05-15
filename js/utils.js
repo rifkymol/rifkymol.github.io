@@ -27,6 +27,8 @@ function getThumbnailStyle(thumbnail) {
 
     const value = String(thumbnail);
     const isImagePath = /\.(jpg|jpeg|png|gif|webp|svg)$/i.test(value) ||
+        value.startsWith('http://') ||
+        value.startsWith('https://') ||
         value.startsWith('blog/') ||
         value.startsWith('projects/') ||
         value.startsWith('books/') ||
@@ -46,11 +48,6 @@ function formatDate(dateString) {
         month: 'short',
         day: 'numeric'
     });
-}
-
-function getSortedBlogPosts() {
-    if (typeof blogPosts === 'undefined') return [];
-    return [...blogPosts].sort((a, b) => new Date(b.date) - new Date(a.date));
 }
 
 function getBookStatusMeta(status) {

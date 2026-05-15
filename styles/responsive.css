@@ -1,3 +1,41 @@
+@media (max-width: 1024px) {
+    .container {
+        max-width: 960px;
+        padding: 5.5rem 1.5rem 3.5rem;
+    }
+
+    .nav-tabs {
+        gap: 1.5rem;
+        max-width: 100%;
+        padding: 1rem 1.5rem;
+    }
+
+    .hero {
+        padding: 5.5rem 0 7rem;
+    }
+
+    .name {
+        font-size: 3.4rem;
+    }
+
+    .tagline {
+        font-size: 1.18rem;
+        max-width: 700px;
+    }
+
+    .hero-highlights,
+    .about-highlights {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .projects-grid,
+    .blog-grid,
+    .books-grid,
+    .hobbies-grid {
+        gap: 1.5rem;
+    }
+}
+
 @media (max-width: 900px) {
     .gallery-masonry {
         columns: 2;
@@ -6,34 +44,33 @@
 
 @media (max-width: 768px) {
     .container {
-        padding: 9rem 1.5rem 3rem;
+        padding: 5.5rem 1.25rem 3rem;
     }
 
     .nav-tabs {
         gap: 1rem;
         justify-content: flex-start;
-        overflow-x: auto;
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
 
     .tab-btn {
-        flex: 0 0 auto;
-        font-size: 0.9rem;
+        font-size: 0.92rem;
+        min-height: 44px;
     }
 
     .hero {
-        padding: 5rem 0 6rem;
+        padding: 4rem 0 5rem;
     }
 
     .name {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
     }
 
     .tagline {
-        font-size: 1.08rem;
+        font-size: 1.05rem;
+        line-height: 1.7;
     }
 
-    .hero-actions,
     .hero-highlights,
     .about-highlights {
         grid-template-columns: 1fr;
@@ -45,68 +82,179 @@
 
     h2 {
         font-size: 1.75rem;
+        margin-bottom: 1.5rem;
     }
 
     .projects-grid,
     .blog-grid,
     .books-grid,
     .hobbies-grid {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.25rem;
+        margin-top: 1.5rem;
+    }
+
+    .project-thumbnail,
+    .blog-thumbnail,
+    .hobby-thumbnail {
+        height: 165px;
+    }
+
+    .book-thumbnail {
+        height: 205px;
+    }
+
+    .project-card-content,
+    .blog-card-content,
+    .book-card-content,
+    .hobby-card-content {
+        padding: 1.25rem;
+    }
+
+    .post-header {
+        display: block;
+        margin-bottom: 2rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .post-header h1 {
+        font-size: 2rem;
+    }
+
+    .post-header-actions {
+        margin-top: 1rem;
+        padding-top: 0;
+    }
+
+    .post-content {
+        font-size: 1rem;
+        line-height: 1.75;
+    }
+
+    .post-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .post-content h2 {
+        font-size: 1.5rem;
+    }
+
+    .post-content h3 {
+        font-size: 1.3rem;
+    }
+
+    .post-content ul,
+    .post-content ol {
+        padding-left: 1.5rem;
     }
 
     .social-links {
         flex-wrap: wrap;
     }
 
+    .lightbox {
+        padding: 1rem;
+    }
+
     .lightbox-nav {
         font-size: 2rem;
-        padding: 0.5rem;
+        padding: 0.4rem;
     }
 
     .lightbox-prev {
-        left: 0.5rem;
+        left: 0.25rem;
     }
 
     .lightbox-next {
-        right: 0.5rem;
+        right: 0.25rem;
     }
 
     .lightbox-close {
         font-size: 2rem;
-        right: 1rem;
-        top: 1rem;
+        right: 0.75rem;
+        top: 0.75rem;
+    }
+
+    #lightbox-img {
+        max-height: calc(100vh - 9rem);
     }
 }
 
 @media (max-width: 600px) {
-    .gallery-preview {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-
-@media (max-width: 500px) {
-    .gallery-masonry {
-        columns: 1;
-    }
-}
-
-@media (max-width: 480px) {
     .container {
         padding-left: 1rem;
         padding-right: 1rem;
     }
 
     .hero {
-        padding-bottom: 5rem;
+        padding: 3rem 0 4rem;
     }
 
     .hero-actions {
         flex-direction: column;
+        margin-bottom: 2rem;
     }
 
-    .primary-action,
-    .secondary-action {
+    .hero-actions .primary-action,
+    .hero-actions .secondary-action {
         width: 100%;
+    }
+
+    .section-header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .view-all,
+    .back-btn {
+        min-height: 40px;
+        padding-left: 0;
+    }
+
+    .reading-filter {
+        gap: 0.45rem;
+    }
+
+    .filter-btn {
+        min-height: 40px;
+        padding: 0.5rem 0.85rem;
+    }
+
+    .gallery-preview {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 5rem 0.875rem 2.5rem;
+    }
+
+    .nav-tabs {
+        gap: 0.85rem;
+        padding: 0.6rem 0.875rem;
+    }
+
+    .tab-btn {
+        font-size: 0.88rem;
+    }
+
+    .name {
+        font-size: 2.25rem;
+    }
+
+    .hero-eyebrow {
+        font-size: 0.74rem;
+        letter-spacing: 0.06em;
+    }
+
+    .tagline {
+        font-size: 0.98rem;
+    }
+
+    .hero-highlights div,
+    .about-highlights div {
+        padding: 0.9rem;
     }
 
     .projects-grid,
@@ -116,21 +264,103 @@
         grid-template-columns: 1fr;
     }
 
-    .section-header {
-        align-items: center;
-        flex-direction: row;
+    .project-thumbnail,
+    .blog-thumbnail,
+    .hobby-thumbnail {
+        height: 150px;
     }
 
-    .post-header {
-        display: block;
+    .book-thumbnail {
+        height: 190px;
     }
 
-    .post-header-actions {
+    .project-card-content,
+    .blog-card-content,
+    .book-card-content,
+    .hobby-card-content {
+        padding: 1rem;
+    }
+
+    .blog-card-content h3 {
+        font-size: 1.15rem;
+    }
+
+    .post-header h1 {
+        font-size: 1.75rem;
+    }
+
+    .post-content pre {
+        padding: 0.85rem;
+    }
+
+    .gallery-masonry {
+        columns: 1;
+    }
+
+    .gallery-preview {
+        gap: 0.4rem;
+    }
+
+    .lightbox {
+        padding: 0.75rem;
+    }
+
+    .lightbox-content {
+        max-height: calc(100vh - 1.5rem);
+    }
+
+    #lightbox-img {
+        max-height: calc(100vh - 8.5rem);
+    }
+
+    .lightbox-info {
         margin-top: 1rem;
-        padding-top: 0;
+    }
+
+    #lightbox-caption {
+        font-size: 0.9rem;
     }
 
     .share-feedback {
         min-width: 0;
+    }
+}
+
+@media (max-width: 360px) {
+    .container {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .nav-tabs {
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+    }
+
+    .name {
+        font-size: 2rem;
+    }
+
+    .section-header h2 {
+        font-size: 0.82rem;
+    }
+
+    .project-links {
+        gap: 0.65rem;
+    }
+}
+
+@media (hover: none) {
+    .project-card:hover,
+    .blog-card:hover,
+    .book-card:hover,
+    .hobby-card:hover,
+    .gallery-item:hover img,
+    .gallery-preview-item:hover img {
+        transform: none;
+    }
+
+    .gallery-item .gallery-caption {
+        opacity: 1;
     }
 }

@@ -11,6 +11,7 @@ function switchTab(targetTab, options = {}) {
 
     targetButton.classList.add('active');
     targetContent.classList.add('active');
+    targetButton.scrollIntoView({ block: 'nearest', inline: 'center' });
 
     if (options.updateUrl !== false) {
         if (targetTab === 'home') {
@@ -24,6 +25,12 @@ function switchTab(targetTab, options = {}) {
 
     if (targetTab === 'blog' && options.showBlogList !== false) {
         showBlogList();
+    }
+
+    if (options.scrollToTop !== false) {
+        requestAnimationFrame(() => window.scrollTo(0, 0));
+        window.setTimeout(() => window.scrollTo(0, 0), 75);
+        window.setTimeout(() => window.scrollTo(0, 0), 300);
     }
 }
 

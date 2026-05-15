@@ -15,6 +15,7 @@
 
 .gallery-item img {
     display: block;
+    height: auto;
     transition: opacity var(--transition-base), transform var(--transition-base);
     width: 100%;
 }
@@ -45,7 +46,7 @@
 .gallery-preview {
     display: grid;
     gap: 0.5rem;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr));
 }
 
 .gallery-preview-item {

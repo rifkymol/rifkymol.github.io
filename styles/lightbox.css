@@ -5,6 +5,7 @@
     height: 100%;
     justify-content: center;
     left: 0;
+    padding: 1.5rem;
     position: fixed;
     top: 0;
     width: 100%;
@@ -17,6 +18,8 @@
     border: 0;
     color: var(--color-surface);
     cursor: pointer;
+    min-height: 44px;
+    min-width: 44px;
     opacity: 0.7;
     position: absolute;
     transition: opacity var(--transition-fast);
@@ -53,12 +56,13 @@
     align-items: center;
     display: flex;
     flex-direction: column;
-    max-height: 90vh;
-    max-width: 90vw;
+    max-height: calc(100vh - 3rem);
+    max-width: min(100%, 1100px);
+    min-width: 0;
 }
 
 #lightbox-img {
-    max-height: 80vh;
+    max-height: calc(100vh - 10rem);
     max-width: 100%;
     object-fit: contain;
 }
@@ -66,6 +70,7 @@
 .lightbox-info {
     color: var(--color-surface);
     margin-top: 1.5rem;
+    max-width: min(100%, 720px);
     text-align: center;
 }
 
@@ -73,6 +78,7 @@
     font-size: 1rem;
     margin-bottom: 0.75rem;
     opacity: 0.9;
+    overflow-wrap: anywhere;
 }
 
 #lightbox-tags {
@@ -87,6 +93,7 @@
     border-radius: 20px;
     color: var(--color-surface);
     font-size: 0.8rem;
+    line-height: 1.35;
     opacity: 0.8;
     padding: 0.3rem 0.8rem;
 }

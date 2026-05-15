@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rifky Maulana - Books, Blog, Photography</title>
-    <meta name="description" content="Personal website of Rifky Maulana, sharing reading notes, writing, photography, and selected projects.">
+    <title>Rifky Maulana - Web Projects & Personal Notes</title>
+    <meta name="description" content="Personal website of Rifky Maulana, highlighting selected web projects with writing, reading notes, and photography.">
     <meta name="theme-color" content="#F9F6EE">
-    <meta property="og:title" content="Rifky Maulana - Books, Blog, Photography">
-    <meta property="og:description" content="Reading notes, writing, photography, and selected projects from Rifky Maulana.">
+    <meta property="og:title" content="Rifky Maulana - Web Projects & Personal Notes">
+    <meta property="og:description" content="Selected web projects from Rifky Maulana, alongside writing, reading notes, and photography.">
     <meta property="og:type" content="website">
     <meta property="og:image" content="projects/images/woo-wa.png">
     <meta name="twitter:card" content="summary_large_image">
@@ -40,53 +40,53 @@
         <!-- Home Section -->
         <section id="home" class="tab-content active">
             <div class="hero">
-                <p class="hero-eyebrow">Books, writing, photos, and a few things I build</p>
+                <p class="hero-eyebrow">Selected web projects, writing, and personal notes</p>
                 <h1 class="name">Rifky Maulana</h1>
-                <p class="tagline">A personal corner for what I read, what I notice, what I write, and the photos I collect along the way. Work still shows up here, but it is not the whole story.</p>
+                <p class="tagline">A project-led personal website for the things I build, the problems I solve, and the notes I keep while learning through web development, writing, books, and photography.</p>
                 <div class="hero-actions" aria-label="Primary actions">
-                    <button class="primary-action view-all" data-tab="blog">Read the Blog</button>
-                    <button class="secondary-action view-all" data-tab="photography">View Photos</button>
+                    <button class="primary-action view-all" data-tab="projects">View Projects</button>
+                    <button class="secondary-action view-all" data-tab="blog">Read the Blog</button>
                 </div>
                 <div class="hero-highlights" aria-label="Personal website themes">
                     <div>
-                        <strong>Reading</strong>
-                        <span>Books I have finished, books in progress, and notes worth keeping.</span>
+                        <strong>Projects</strong>
+                        <span>Selected web apps, plugins, dashboards, and interfaces I have built or contributed to.</span>
                     </div>
                     <div>
-                        <strong>Writing</strong>
-                        <span>Blog posts about learning, building, habits, and small life observations.</span>
+                        <strong>Development</strong>
+                        <span>Frontend, backend, WordPress, and data-focused work across real product contexts.</span>
                     </div>
                     <div>
-                        <strong>Photography</strong>
-                        <span>Street, landscape, and everyday frames from wherever I happen to be.</span>
+                        <strong>Personal Context</strong>
+                        <span>Writing, reading, and photography that show how I think and what I notice.</span>
                     </div>
                 </div>
             </div>
             
             <section class="recent-section">
-                <section class="recent-section">
-                    <div class="section-header">
-                        <h2>Projects</h2>
-                        <button class="view-all" data-tab="projects">View All →</button>
-                    </div>
-                    <div id="recent-projects" class="projects-grid">
-                        <!-- Loaded dynamically from projects-config.js -->
-                        <p class="loading">Loading projects...</p>
-                    </div>
-                </section>
-
                 <div class="section-header">
-                    <h2>📷 Photography</h2>
-                    <button class="view-all" data-tab="photography">View All →</button>
+                    <h2>Selected Projects</h2>
+                    <button class="view-all" data-tab="projects">View All →</button>
                 </div>
-                <div id="recent-photos" class="gallery-preview">
-                    <!-- Loaded dynamically from hobbies-config.js -->
-                    <p class="loading">Loading photos...</p>
+                <div id="recent-projects" class="projects-grid">
+                    <!-- Loaded dynamically from projects-config.js -->
+                    <p class="loading">Loading projects...</p>
                 </div>
             </section>
 
             <!-- Recent Content Section -->
             <div class="recent-content">
+                <section class="recent-section">
+                    <div class="section-header">
+                        <h2>Latest Blog Posts</h2>
+                        <button class="view-all" data-tab="blog">View All →</button>
+                    </div>
+                    <div id="recent-blogs" class="blog-grid">
+                        <!-- Loaded dynamically from Medium RSS -->
+                        <p class="loading">Loading posts...</p>
+                    </div>
+                </section>
+
                 <section class="recent-section">
                     <div class="section-header">
                         <h2>Reading List</h2>
@@ -100,12 +100,12 @@
 
                 <section class="recent-section">
                     <div class="section-header">
-                        <h2>Latest Blog Posts</h2>
-                        <button class="view-all" data-tab="blog">View All →</button>
+                        <h2>📷 Photography</h2>
+                        <button class="view-all" data-tab="photography">View All →</button>
                     </div>
-                    <div id="recent-blogs" class="blog-grid">
-                        <!-- Loaded dynamically from blog-config.js -->
-                        <p class="loading">Loading posts...</p>
+                    <div id="recent-photos" class="gallery-preview">
+                        <!-- Loaded dynamically from hobbies-config.js -->
+                        <p class="loading">Loading photos...</p>
                     </div>
                 </section>
                 
@@ -116,19 +116,19 @@
         <section id="about" class="tab-content">
             <h2>About Me</h2>
             <p class="about-text">
-                Hi, I'm Rifky. This website is where I keep the parts of myself that do not fit neatly into a resume: books I am reading, posts I am trying to write, photos I like, and projects I have built.
+                Hi, I'm Rifky. This website highlights the web projects I have built or contributed to, with the personal notes, books, and photos that shape how I learn.
             </p>
             <p class="about-text">
-                I work as a web developer, but the broader thread here is curiosity. I am trying to read more carefully, write more consistently, notice better light, cook better food, and still find time for games when life allows it.
+                I work as a web developer, and I like building practical interfaces, internal tools, WordPress products, and small systems that make everyday workflows smoother.
             </p>
             <div class="about-highlights" aria-label="Personal focus">
                 <div>
                     <strong>This site is for</strong>
-                    <span>Reading notes, essays, photo collections, and small records of what I am learning.</span>
+                    <span>Selected projects, development notes, and a clearer picture of how I approach building for the web.</span>
                 </div>
                 <div>
                     <strong>Also here</strong>
-                    <span>Selected web projects, because building things is still part of how I understand the world.</span>
+                    <span>Books, essays, and photography, because personal curiosity still feeds the work.</span>
                 </div>
             </div>
             <div class="social-links">
@@ -227,7 +227,6 @@
     <script src="projects/projects-config.js"></script>
     <script src="books/books-config.js"></script>
     <script src="hobbies/hobbies-config.js"></script>
-    <script src="blog/blog-config.js"></script>
     <script src="js/utils.js"></script>
     <script src="js/navigation.js"></script>
     <script src="js/render-projects.js"></script>

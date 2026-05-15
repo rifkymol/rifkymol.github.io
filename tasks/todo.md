@@ -1,26 +1,25 @@
-# Clean Blog URL Tanpa Hash + Share Artikel
+# Integrasi Blog Tab Dengan Medium RSS
 
 ## Checklist
-- [x] Review current static site structure and previous lessons.
-- [x] Add blog slugs and route helpers for clean blog URLs.
-- [x] Update blog list/detail rendering to use `/blog` and `/blog/{slug}`.
-- [x] Add article share button with Web Share API and clipboard fallback.
-- [x] Add lightweight share/header styles.
-- [x] Add Azure Static Web Apps fallback config.
-- [x] Verify home, blog list, blog detail, direct route fallback, missing slug, back link, and share fallback behavior.
+- [x] Review current blog renderer/config and preserve existing working-tree changes.
+- [x] Add cached Medium RSS-to-JSON fetch helper.
+- [x] Render Blog tab from Medium RSS cards that open Medium in a new tab.
+- [x] Render Home latest posts from the same cached Medium feed.
+- [x] Add loading, empty, and error fallback states with Medium profile link.
+- [x] Make stale `/blog/{slug}` routes fall back to the Medium-backed blog list for v1.
+- [x] Run syntax, feed parsing, and local smoke verification.
 
 ## Verification
+- Medium RSS proxy check returned `status=ok` with 1 item from `https://medium.com/feed/@rifkymol`.
 - `node --check` passed for all JavaScript files.
-- `staticwebapp.config.json` parsed successfully as JSON.
-- Blog config validation passed: every post has a unique slug and existing Markdown file.
-- Search check found no remaining `#blog`, `data-post`, or `updateHash` usage.
-- Local rewrite server returned `200` for `/`, `/blog`, `/blog/introduction-to-artificial-intelligence`, and `/blog/slug-yang-tidak-ada`.
-- Local rewrite server confirmed nested blog routes receive `index.html` with `<base href="/">`.
-- Share handler unit check passed for both `navigator.share` and clipboard fallback, including `Link copied` feedback.
-- Visual browser automation was not available from the exposed tools/PATH in this session, so final click-through visual verification was covered by route and handler checks instead.
+- `git diff --check` passed with no whitespace errors.
+- Medium parser check passed for excerpt stripping, image extraction, and encoded RSS proxy URL.
+- Headless Edge check passed: `/` and `/blog` render Medium cards, external links point to Medium, and links use `target="_blank"` plus `rel="noopener noreferrer"`.
+- Stale local article route check passed: `/blog/old-local-slug` falls back to `/blog` list view for v1.
 
 ## Review
-- Blog routing now uses clean paths for `/blog` and `/blog/{slug}` while keeping non-blog tabs on the existing hash behavior.
-- Blog cards use `slug` as the URL identifier, and article detail loading now receives the full post object.
-- Article detail headers now include a `Share` button with native Web Share support and clipboard fallback.
-- Azure Static Web Apps now has a navigation fallback so direct blog routes refresh to `index.html`.
+- Blog tab and Home latest blog posts now use the Medium RSS feed for `@rifkymol` through `rss2json`.
+- The feed request is cached in memory so Home and Blog share one fetch.
+- Blog cards now open the original Medium article in a new tab instead of loading local Markdown detail pages.
+- Error and empty states show a Medium profile fallback link.
+- The local `blog/blog-config.js` script is no longer loaded by `index.html`; the existing file is preserved for now but is not the Blog source.

@@ -34,6 +34,13 @@ body {
     color: var(--color-text);
     font-family: var(--font-body);
     line-height: 1.6;
+    overflow-x: clip;
+}
+
+img,
+video {
+    height: auto;
+    max-width: 100%;
 }
 
 button,
@@ -59,11 +66,14 @@ a:focus-visible,
     max-width: 1200px;
     min-height: calc(100vh - 100px);
     padding: 6rem 2rem 4rem;
+    width: 100%;
 }
 
 .tab-content {
     display: none;
+    min-width: 0;
     opacity: 0;
+    scroll-margin-top: 6rem;
 }
 
 .tab-content.active {

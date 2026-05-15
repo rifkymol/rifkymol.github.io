@@ -1,139 +1,148 @@
-function loadBlogPosts() {
+const MEDIUM_PROFILE_URL = 'https://medium.com/@rifkymol';
+const MEDIUM_RSS_URL = 'https://medium.com/feed/@rifkymol';
+const MEDIUM_RSS_PROXY_URL = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(MEDIUM_RSS_URL)}`;
+const MEDIUM_FALLBACK_THUMBNAIL = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+
+let mediumPostsPromise = null;
+
+async function loadBlogPosts() {
     const container = document.getElementById('blog-posts-container');
     if (!container) return;
 
-    const posts = getSortedBlogPosts();
-    if (posts.length === 0) {
-        container.innerHTML = '<p class="no-posts">No blog posts yet. Check back soon!</p>';
-        return;
+    container.innerHTML = '<p class="loading">Loading Medium posts...</p>';
+
+    try {
+        const posts = await getMediumPosts();
+        if (posts.length === 0) {
+            container.innerHTML = renderMediumFeedFallback('No Medium posts yet.');
+            return;
+        }
+
+        container.innerHTML = `
+            <div class="blog-grid">
+                ${posts.map(post => renderBlogCard(post, { showReadMore: true })).join('')}
+            </div>
+        `;
+    } catch (error) {
+        container.innerHTML = renderMediumFeedFallback('Unable to load Medium posts right now.');
     }
-
-    container.innerHTML = `
-        <div class="blog-grid">
-            ${posts.map(post => renderBlogCard(post, { showReadMore: true })).join('')}
-        </div>
-    `;
-
-    attachBlogCardListeners(container);
 }
 
-function getBlogPostBySlug(slug) {
-    const posts = getSortedBlogPosts();
-    return posts.find(post => post.slug === slug);
+async function loadRecentBlogs() {
+    const container = document.getElementById('recent-blogs');
+    if (!container) return;
+
+    container.innerHTML = '<p class="loading">Loading Medium posts...</p>';
+
+    try {
+        const posts = await getMediumPosts();
+        if (posts.length === 0) {
+            container.innerHTML = renderMediumFeedFallback('No Medium posts yet.');
+            return;
+        }
+
+        container.innerHTML = posts
+            .slice(0, 3)
+            .map(post => renderBlogCard(post, { preview: true }))
+            .join('');
+    } catch (error) {
+        container.innerHTML = renderMediumFeedFallback('Unable to load Medium posts right now.');
+    }
+}
+
+function getMediumPosts() {
+    if (!mediumPostsPromise) {
+        mediumPostsPromise = fetch(MEDIUM_RSS_PROXY_URL)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Failed to load Medium RSS feed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.status !== 'ok' || !Array.isArray(data.items)) {
+                    throw new Error(data.message || 'Invalid Medium RSS response');
+                }
+
+                return data.items
+                    .map(normalizeMediumPost)
+                    .filter(post => post.title && post.link)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date));
+            });
+    }
+
+    return mediumPostsPromise;
+}
+
+function normalizeMediumPost(item) {
+    const html = item.content || item.description || '';
+
+    return {
+        id: item.guid || item.link || item.title,
+        title: item.title || 'Untitled Medium post',
+        date: parseMediumDate(item.pubDate),
+        excerpt: truncateText(stripHTML(item.description || item.content || ''), 170),
+        thumbnail: item.thumbnail || getFirstImageFromHTML(html) || MEDIUM_FALLBACK_THUMBNAIL,
+        link: item.link,
+        source: 'Medium'
+    };
+}
+
+function parseMediumDate(value) {
+    if (!value) return new Date().toISOString();
+    return value.includes(' ') ? value.replace(' ', 'T') : value;
 }
 
 function renderBlogCard(post, options = {}) {
     const formattedDate = formatDate(post.date);
     const thumbnailStyle = getThumbnailStyle(post.thumbnail);
-    const slug = post.slug || post.id;
 
     return `
-        <article class="blog-card${options.preview ? ' blog-card-preview' : ''}" data-slug="${escapeAttribute(slug)}" tabindex="0" role="button" aria-label="Read ${escapeAttribute(post.title)}">
+        <a class="blog-card${options.preview ? ' blog-card-preview' : ''}" href="${escapeAttribute(post.link)}" target="_blank" rel="noopener noreferrer" aria-label="Read ${escapeAttribute(post.title)} on Medium">
             <div class="blog-thumbnail" style="${thumbnailStyle}" role="img" aria-label="${escapeAttribute(post.title)} thumbnail"></div>
             <div class="blog-card-content">
-                <p class="post-date">${escapeHTML(formattedDate)}</p>
+                <p class="post-date">${escapeHTML(formattedDate)} · Medium</p>
                 <h3>${escapeHTML(post.title)}</h3>
                 <p>${escapeHTML(post.excerpt)}</p>
-                ${options.showReadMore ? '<span class="read-more-btn">Read More →</span>' : ''}
+                ${options.showReadMore ? '<span class="read-more-btn">Read on Medium →</span>' : ''}
             </div>
-        </article>
+        </a>
     `;
 }
 
-function attachBlogCardListeners(scope) {
-    scope.querySelectorAll('.blog-card').forEach(card => {
-        const openPost = () => {
-            showBlogPostBySlug(card.getAttribute('data-slug'), { updateUrl: true });
-        };
-
-        card.addEventListener('click', openPost);
-        card.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                openPost();
-            }
-        });
-    });
-}
-
-function showBlogPostBySlug(slug, options = {}) {
-    const post = getBlogPostBySlug(slug);
-
-    if (options.updateUrl !== false) {
-        history.pushState(null, '', `/blog/${encodeURIComponent(slug)}`);
-    }
-
-    if (!post) {
-        showBlogNotFound(slug);
-        return;
-    }
-
-    loadBlogPost(post);
-}
-
-async function loadBlogPost(post) {
-    const listView = document.getElementById('blog-list-view');
-    const postView = document.getElementById('blog-post-view');
-    const contentDiv = document.getElementById('blog-content');
-
-    if (!listView || !postView || !contentDiv) return;
-
-    contentDiv.innerHTML = '<p class="loading">Loading post...</p>';
-    listView.style.display = 'none';
-    postView.style.display = 'block';
-
-    try {
-        const response = await fetch(post.file);
-        if (!response.ok) throw new Error('Failed to load post');
-
-        const markdown = await response.text();
-        const htmlContent = sanitizeMarkdown(markdown);
-        const formattedDate = formatDate(post.date);
-
-        contentDiv.innerHTML = `
-            <div class="post-header">
-                <div class="post-header-main">
-                    <h1>${escapeHTML(post.title)}</h1>
-                    <div class="post-date">${escapeHTML(formattedDate)}</div>
-                </div>
-                <div class="post-header-actions">
-                    <button id="share-post" class="share-btn" type="button">Share</button>
-                    <span id="share-feedback" class="share-feedback" aria-live="polite"></span>
-                </div>
-            </div>
-            <div class="post-content">
-                ${htmlContent}
-            </div>
-        `;
-
-        attachSharePostListener(post);
-        window.scrollTo(0, 0);
-    } catch (error) {
-        contentDiv.innerHTML = `
-            <p class="error">Failed to load blog post. Make sure the markdown file exists.</p>
-            <p class="error-detail">${escapeHTML(error.message)}</p>
-        `;
-    }
-}
-
-function showBlogNotFound(slug) {
-    const listView = document.getElementById('blog-list-view');
-    const postView = document.getElementById('blog-post-view');
-    const contentDiv = document.getElementById('blog-content');
-
-    if (!listView || !postView || !contentDiv) return;
-
-    listView.style.display = 'none';
-    postView.style.display = 'block';
-    contentDiv.innerHTML = `
-        <div class="post-header">
-            <div class="post-header-main">
-                <h1>Post not found</h1>
-                <div class="post-date">No article matches "${escapeHTML(slug)}".</div>
-            </div>
+function renderMediumFeedFallback(message) {
+    return `
+        <div class="blog-feed-fallback">
+            <p>${escapeHTML(message)}</p>
+            <a href="${MEDIUM_PROFILE_URL}" target="_blank" rel="noopener noreferrer">Open Medium profile →</a>
         </div>
-        <p class="error">The blog post you opened does not exist or has moved.</p>
     `;
+}
+
+function stripHTML(value) {
+    const withoutTags = String(value || '')
+        .replace(/<script[\s\S]*?<\/script>/gi, ' ')
+        .replace(/<style[\s\S]*?<\/style>/gi, ' ')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+
+    if (typeof document === 'undefined') return withoutTags;
+
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = withoutTags;
+    return textarea.value;
+}
+
+function truncateText(value, maxLength) {
+    const text = String(value || '').trim();
+    if (text.length <= maxLength) return text;
+    return `${text.slice(0, maxLength).trimEnd()}...`;
+}
+
+function getFirstImageFromHTML(html) {
+    const match = String(html || '').match(/<img[^>]+src=["']([^"']+)["']/i);
+    return match ? match[1] : '';
 }
 
 function showBlogList(options = {}) {
@@ -148,65 +157,6 @@ function showBlogList(options = {}) {
     }
 }
 
-async function attachSharePostListener(post) {
-    const shareButton = document.getElementById('share-post');
-    const feedback = document.getElementById('share-feedback');
-    if (!shareButton || !feedback) return;
-
-    const url = `${window.location.origin}/blog/${post.slug}`;
-
-    shareButton.addEventListener('click', async () => {
-        feedback.textContent = '';
-
-        if (navigator.share) {
-            try {
-                await navigator.share({
-                    title: post.title,
-                    text: post.excerpt,
-                    url
-                });
-                return;
-            } catch (error) {
-                if (error.name === 'AbortError') return;
-            }
-        }
-
-        try {
-            await navigator.clipboard.writeText(url);
-            feedback.textContent = 'Link copied';
-        } catch (error) {
-            feedback.textContent = 'Copy failed';
-        }
-    });
-}
-
-function loadRecentBlogs() {
-    const container = document.getElementById('recent-blogs');
-    if (!container) return;
-
-    const posts = getSortedBlogPosts();
-    if (posts.length === 0) {
-        container.innerHTML = '<p>No blog posts yet.</p>';
-        return;
-    }
-
-    container.innerHTML = posts
-        .slice(0, 3)
-        .map(post => renderBlogCard(post, { preview: true }))
-        .join('');
-
-    container.querySelectorAll('.blog-card-preview').forEach(card => {
-        const openPreview = () => {
-            switchTab('blog');
-            showBlogPostBySlug(card.getAttribute('data-slug'), { updateUrl: true });
-        };
-
-        card.addEventListener('click', openPreview);
-        card.addEventListener('keydown', event => {
-            if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault();
-                openPreview();
-            }
-        });
-    });
+function showBlogPostBySlug() {
+    showBlogList();
 }
