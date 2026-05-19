@@ -1,8 +1,10 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     window.scrollTo(0, 0);
 
     initNavigation();
     initLightbox();
+
+    await loadProjectsData();
 
     loadBlogPosts();
     loadRecentProjects();

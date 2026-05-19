@@ -1,6 +1,7 @@
 const SiteState = {
     currentGallery: [],
-    currentGalleryIndex: 0
+    currentGalleryIndex: 0,
+    isRecentPhotosExpanded: false
 };
 
 function escapeHTML(value) {

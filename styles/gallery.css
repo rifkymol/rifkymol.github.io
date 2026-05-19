@@ -67,3 +67,34 @@
     opacity: 0.9;
     transform: scale(1.04);
 }
+
+.photo-preview-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    grid-column: 1 / -1;
+    justify-content: center;
+    margin-top: 0.75rem;
+}
+
+.photo-preview-toggle,
+.photo-preview-view-all {
+    background: none;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    color: var(--color-heading);
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 0.9rem;
+    transition: background var(--transition-fast), opacity var(--transition-fast);
+}
+
+.photo-preview-toggle:hover,
+.photo-preview-view-all:hover,
+.photo-preview-toggle:focus-visible,
+.photo-preview-view-all:focus-visible {
+    background: var(--color-surface-soft);
+    opacity: 0.85;
+}

@@ -1,3 +1,21 @@
+const TAB_ROUTES = {
+    home: '/',
+    projects: '/projects',
+    blog: '/blog',
+    reading: '/reading',
+    photography: '/photography',
+    about: '/about'
+};
+
+function getRouteForTab(tab) {
+    return TAB_ROUTES[tab] || '/';
+}
+
+function getTabForPath(path) {
+    return Object.entries(TAB_ROUTES)
+        .find(([, route]) => route === path)?.[0] || null;
+}
+
 function switchTab(targetTab, options = {}) {
     const tabButtons = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
@@ -14,13 +32,7 @@ function switchTab(targetTab, options = {}) {
     targetButton.scrollIntoView({ block: 'nearest', inline: 'center' });
 
     if (options.updateUrl !== false) {
-        if (targetTab === 'home') {
-            history.pushState(null, '', '/');
-        } else if (targetTab === 'blog') {
-            history.pushState(null, '', '/blog');
-        } else {
-            history.pushState(null, '', `/#${targetTab}`);
-        }
+        history.pushState(null, '', getRouteForTab(targetTab));
     }
 
     if (targetTab === 'blog' && options.showBlogList !== false) {
@@ -50,16 +62,16 @@ function initNavigation() {
 
     function handleRouteChange() {
         const path = window.location.pathname.replace(/\/+$/, '') || '/';
+        const tab = getTabForPath(path);
 
-        if (path === '/') {
-            const hash = window.location.hash.substring(1);
-            switchTab(hash || 'home', { updateUrl: false });
+        if (tab === 'blog') {
+            switchTab('blog', { updateUrl: false });
+            showBlogList();
             return;
         }
 
-        if (path === '/blog') {
-            switchTab('blog', { updateUrl: false });
-            showBlogList();
+        if (tab) {
+            switchTab(tab, { updateUrl: false });
             return;
         }
 
@@ -73,14 +85,6 @@ function initNavigation() {
         switchTab('home', { updateUrl: false });
     }
 
-    function handleHashChange() {
-        const hash = window.location.hash.substring(1);
-        if (window.location.pathname === '/' && hash) {
-            switchTab(hash, { updateUrl: false });
-        }
-    }
-
     handleRouteChange();
-    window.addEventListener('hashchange', handleHashChange);
     window.addEventListener('popstate', handleRouteChange);
 }

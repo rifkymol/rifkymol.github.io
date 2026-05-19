@@ -1,3 +1,6 @@
+const RECENT_PHOTOS_INITIAL_LIMIT = 6;
+const RECENT_PHOTOS_EXPANDED_LIMIT = 12;
+
 function getPhotographyGallery() {
     if (typeof hobbies === 'undefined') return null;
     return hobbies.find(hobby => hobby.id === 'photography');
@@ -61,11 +64,24 @@ function loadRecentPhotos() {
         return;
     }
 
-    container.innerHTML = photos.slice(0, 6).map((photo, index) => `
+    const isExpanded = Boolean(SiteState.isRecentPhotosExpanded);
+    const limit = isExpanded ? RECENT_PHOTOS_EXPANDED_LIMIT : RECENT_PHOTOS_INITIAL_LIMIT;
+    const visiblePhotos = photos.slice(0, Math.min(limit, photos.length));
+    const canToggle = photos.length > RECENT_PHOTOS_INITIAL_LIMIT;
+    const hasMoreThanExpandedLimit = photos.length > RECENT_PHOTOS_EXPANDED_LIMIT;
+
+    container.innerHTML = visiblePhotos.map((photo, index) => `
         <div class="gallery-preview-item" data-index="${index}">
             <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.alt)}" loading="lazy">
         </div>
-    `).join('');
+    `).join('') + (canToggle ? `
+        <div class="photo-preview-actions">
+            <button type="button" class="photo-preview-toggle">
+                ${isExpanded ? 'Show Less' : 'Show More Photos'}
+            </button>
+            ${isExpanded && hasMoreThanExpandedLimit ? '<button type="button" class="photo-preview-view-all view-all" data-tab="photography">View All Photos →</button>' : ''}
+        </div>
+    ` : '');
 
     container.querySelectorAll('.gallery-preview-item').forEach(item => {
         item.addEventListener('click', () => {
@@ -73,6 +89,21 @@ function loadRecentPhotos() {
             openLightbox(parseInt(item.getAttribute('data-index'), 10));
         });
     });
+
+    const toggleButton = container.querySelector('.photo-preview-toggle');
+    if (toggleButton) {
+        toggleButton.addEventListener('click', () => {
+            SiteState.isRecentPhotosExpanded = !SiteState.isRecentPhotosExpanded;
+            loadRecentPhotos();
+        });
+    }
+
+    const viewAllButton = container.querySelector('.photo-preview-view-all');
+    if (viewAllButton) {
+        viewAllButton.addEventListener('click', () => {
+            switchTab(viewAllButton.getAttribute('data-tab'));
+        });
+    }
 }
 
 function initLightbox() {

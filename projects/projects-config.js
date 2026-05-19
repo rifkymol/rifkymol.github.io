@@ -18,7 +18,7 @@
  * Images: Store in projects/images/ folder
  */
 
-const projects = [
+const fallbackProjects = [
     {
         id: 'woowa',
         title: 'Woo-wa',
@@ -82,7 +82,9 @@ const projects = [
     },
 ];
 
+let projects = [...fallbackProjects];
+
 // Export for use in other files (if using modules)
 if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { projects };
+    module.exports = { projects, fallbackProjects };
 }
