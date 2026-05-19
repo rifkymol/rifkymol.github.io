@@ -16,9 +16,10 @@
     justify-content: space-between;
     margin: 0 auto;
     max-width: 1200px;
-    overflow-x: auto;
+    overflow: visible;
     overscroll-behavior-x: contain;
     padding: 1.25rem 2rem;
+    position: relative;
     scrollbar-width: thin;
     white-space: nowrap;
     -webkit-overflow-scrolling: touch;
@@ -27,6 +28,11 @@
 .nav-links {
     display: flex;
     gap: 1.75rem;
+}
+
+.mobile-menu-toggle,
+.mobile-home-link {
+    display: none;
 }
 
 .tab-btn {
