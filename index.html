@@ -26,12 +26,14 @@
     <!-- Navigation -->
     <nav class="nav-container">
         <div class="nav-tabs">
-            <button class="tab-btn active" data-tab="home">Home</button>
-            <button class="tab-btn" data-tab="projects">Projects</button>
-            <button class="tab-btn" data-tab="blog">Blog</button>
-            <button class="tab-btn" data-tab="reading">Reading</button>
-            <button class="tab-btn" data-tab="photography">Photography</button>
-            <button class="tab-btn" data-tab="about">About</button>
+            <button class="nav-brand tab-btn active" data-tab="home">Rifky Maulana</button>
+            <div class="nav-links" aria-label="Primary navigation">
+                <button class="tab-btn" data-tab="projects">Projects</button>
+                <button class="tab-btn" data-tab="blog">Blog</button>
+                <button class="tab-btn" data-tab="reading">Reading</button>
+                <button class="tab-btn" data-tab="photography">Photography</button>
+                <button class="tab-btn" data-tab="about">About</button>
+            </div>
         </div>
     </nav>
 
@@ -39,21 +41,28 @@
     <main class="container">
         <!-- Home Section -->
         <section id="home" class="tab-content active">
-            <div class="hero">
-                <p class="hero-eyebrow">Hello there! I am</p>
-                <h1 class="name">Rifky Maulana</h1>
-                <p class="tagline">A project-led personal website for the things I build, the problems I solve, and the notes I keep while learning through AI and Data Science, writing, books, and photography.</p>
-                <div class="hero-actions" aria-label="Primary actions">
-                    <button class="primary-action view-all" data-tab="projects">View Projects</button>
-                    <button class="secondary-action view-all" data-tab="blog">Read the Blog</button>
-                    <a
-                        href="assets/cv/Rifky_Maulana_CV.pdf"
-                        class="secondary-action"
-                        download
-                        aria-label="Download Rifky Maulana CV as PDF"
-                    >Download CV</a>
+            <div class="hero hero-editorial">
+                <div class="hero-main">
+                    <figure class="hero-media">
+                        <img src="assets/images/hero-placeholder.jpg" alt="Rifky Maulana portrait placeholder">
+                    </figure>
+                    <div class="hero-copy">
+                        <p class="hero-eyebrow">IT DEVELOPER BUILDING PRACTICAL SOFTWARE, LEARNING AI, AND SOLVING REAL-WORLD PROBLEMS</p>
+                        <h1 class="name">Rifky Maulana</h1>
+                        <p class="tagline">A project-led personal website for the things I build, the problems I solve, and the notes I keep while learning through AI and Data Science, writing, books, and photography.</p>
+                        <div class="hero-actions" aria-label="Primary actions">
+                            <button class="primary-action view-all" data-tab="projects">View Projects</button>
+                            <button class="secondary-action view-all" data-tab="blog">Read the Blog</button>
+                            <a
+                                href="assets/cv/Rifky_Maulana_CV.pdf"
+                                class="secondary-action"
+                                download
+                                aria-label="Download Rifky Maulana CV as PDF"
+                            >Download CV</a>
+                        </div>
+                    </div>
                 </div>
-                <div class="hero-highlights" aria-label="Personal website themes">
+                <!-- <div class="hero-highlights" aria-label="Personal website themes">
                     <div>
                         <strong>Projects</strong>
                         <span>Selected web apps, plugins, dashboards, and interfaces I have built or contributed to.</span>
@@ -66,7 +75,7 @@
                         <strong>Personal Context</strong>
                         <span>Writing, reading, and photography that show how I think and what I notice.</span>
                     </div>
-                </div>
+                </div> -->
             </div>
             
             <section class="recent-section">

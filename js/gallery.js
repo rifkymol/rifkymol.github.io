@@ -1,5 +1,26 @@
 const RECENT_PHOTOS_INITIAL_LIMIT = 6;
 const RECENT_PHOTOS_EXPANDED_LIMIT = 12;
+const PORTRAIT_PHOTO_SOURCES = new Set([
+    'hobbies/images/20250719_151134.jpg',
+    'hobbies/images/A.jpg',
+    'hobbies/images/B.jpg',
+    'hobbies/images/C.jpg',
+    'hobbies/images/D.jpg',
+    'hobbies/images/F.jpg',
+    'hobbies/images/G.jpg',
+    'hobbies/images/H.jpg',
+    'hobbies/images/I.jpg',
+    'hobbies/images/J.jpg',
+    'hobbies/images/L.jpg',
+    'hobbies/images/N.jpg',
+    'hobbies/images/O.jpg',
+    'hobbies/images/P.jpg',
+    'hobbies/images/Q.jpg',
+    'hobbies/images/R.jpg',
+    'hobbies/images/S.jpg',
+    'hobbies/images/T.jpg',
+    'hobbies/images/Z.jpg'
+]);
 
 function getPhotographyGallery() {
     if (typeof hobbies === 'undefined') return null;
@@ -21,6 +42,7 @@ function getNormalizedPhotos() {
         .map((photo, index) => ({
             ...photo,
             caption: String(photo.caption || '').trim(),
+            orientation: photo.orientation || (PORTRAIT_PHOTO_SOURCES.has(photo.src) ? 'portrait' : 'landscape'),
             source: photo.source || 'local',
             tags: Array.isArray(photo.tags) ? photo.tags.map(tag => String(tag).trim()).filter(Boolean) : [],
             alt: photo.alt || photo.caption || `Photography ${index + 1}`
@@ -41,7 +63,7 @@ function loadPhotographyGallery() {
     SiteState.currentGalleryIndex = 0;
 
     container.innerHTML = photos.map((photo, index) => `
-        <div class="gallery-item" data-index="${index}">
+        <div class="gallery-item ${escapeAttribute(`gallery-item-${photo.orientation}`)}" data-index="${index}">
             <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.alt)}" loading="lazy">
             ${photo.caption ? `<span class="gallery-caption">${escapeHTML(photo.caption)}</span>` : ''}
         </div>
@@ -71,7 +93,7 @@ function loadRecentPhotos() {
     const hasMoreThanExpandedLimit = photos.length > RECENT_PHOTOS_EXPANDED_LIMIT;
 
     container.innerHTML = visiblePhotos.map((photo, index) => `
-        <div class="gallery-preview-item" data-index="${index}">
+        <div class="gallery-preview-item ${escapeAttribute(`gallery-preview-item-${photo.orientation}`)}" data-index="${index}">
             <img src="${escapeAttribute(photo.src)}" alt="${escapeAttribute(photo.alt)}" loading="lazy">
         </div>
     `).join('') + (canToggle ? `

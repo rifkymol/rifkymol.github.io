@@ -44,21 +44,29 @@
 }
 
 .gallery-preview {
+    align-items: start;
     display: grid;
     gap: 0.5rem;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 120px), 1fr));
 }
 
 .gallery-preview-item {
-    aspect-ratio: 1;
+    align-self: start;
+    aspect-ratio: 16 / 10;
     border-radius: var(--radius-md);
     cursor: pointer;
     overflow: hidden;
 }
 
+.gallery-preview-item-portrait {
+    aspect-ratio: 3 / 4;
+}
+
 .gallery-preview-item img {
+    display: block;
     height: 100%;
     object-fit: cover;
+    object-position: center;
     transition: opacity var(--transition-base), transform var(--transition-base);
     width: 100%;
 }
